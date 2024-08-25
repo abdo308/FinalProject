@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.kotlin.kapt)
 }
 
 android {
@@ -44,9 +45,11 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation("com.airbnb.android:lottie:6.5.0")
     implementation ("androidx.navigation:navigation-fragment-ktx:2.7.7")
-
+    implementation ("com.google.android.material:material:1.9.0")
     implementation ("androidx.navigation:navigation-ui-ktx:2.7.7")
-
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.runtime)
+    annotationProcessor(libs.androidx.room.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
