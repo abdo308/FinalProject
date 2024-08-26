@@ -8,7 +8,7 @@ import androidx.room.TypeConverters
 import com.example.finalproject.models.User
 import com.example.finalproject.models.UserFavourites
 
-@Database(entities = [User::class,UserFavourites::class], version = 1, exportSchema = false)
+@Database(entities = [User::class,UserFavourites::class], version = 2, exportSchema = false)
 @TypeConverters(MealConverter::class)
 abstract class ApplicationDataBase : RoomDatabase() {
 

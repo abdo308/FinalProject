@@ -3,8 +3,12 @@ package com.example.finalproject.ui
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.speech.AlternativeSpan
+import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -52,23 +56,16 @@ class HomeActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_sign_out -> {
-                val intent = Intent(this,MainActivity::class.java)
-                val sharedPreference= getSharedPreferences("key", Context.MODE_PRIVATE)
-                with(sharedPreference.edit()){
-                    putBoolean("isLoggedIn",false)
-                    apply()
-                    startActivity(intent)
-                    finish()
-                }
+                showConfirmationMessage()
                 return true
             }
+
             R.id.action_about_us -> {
                 val navController = findNavController(R.id.nav_host_fragment_content_home)
-                if(navController.currentDestination?.id != R.id.aboutUsFragment)
-                    if(navController.currentDestination?.id == R.id.FirstFragment)
+                if (navController.currentDestination?.id != R.id.aboutUsFragment)
+                    if (navController.currentDestination?.id == R.id.FirstFragment)
                         navController.navigate(R.id.action_FirstFragment_to_aboutUsFragment)
-
-                    else if(navController.currentDestination?.id == R.id.SecondFragment)
+                    else if (navController.currentDestination?.id == R.id.SecondFragment)
                         navController.navigate(R.id.action_SecondFragment_to_aboutUsFragment)
 
                 return true
@@ -77,4 +74,26 @@ class HomeActivity : AppCompatActivity() {
         return false
     }
 
+    fun showConfirmationMessage() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Sign Out")
+        builder.setMessage("Are you sure you want to sign out?")
+        builder.setPositiveButton("Yes") { dialog, which ->
+            val intent = Intent(this, MainActivity::class.java)
+            val sharedPreference = getSharedPreferences("key", Context.MODE_PRIVATE)
+            Toast.makeText(this,"Signed Out Successfully",Toast.LENGTH_LONG).show()
+            with(sharedPreference.edit()) {
+                putBoolean("isLoggedIn", false)
+                apply()
+                startActivity(intent)
+                finish()
+            }
+        }
+        builder.setNegativeButton("No"){
+                dialog, which ->
+        }
+        val dialog: AlertDialog = builder.create()
+        dialog.window?.setGravity(Gravity.CENTER)
+        dialog.show()
+    }
 }
