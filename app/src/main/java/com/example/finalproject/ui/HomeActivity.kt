@@ -1,5 +1,7 @@
 package com.example.finalproject.ui
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -50,7 +52,14 @@ class HomeActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_sign_out -> {
-
+                val intent = Intent(this,MainActivity::class.java)
+                val sharedPreference= getSharedPreferences("key", Context.MODE_PRIVATE)
+                with(sharedPreference.edit()){
+                    putBoolean("isLoggedIn",false)
+                    apply()
+                    startActivity(intent)
+                    finish()
+                }
                 return true
             }
             R.id.action_about_us -> {
