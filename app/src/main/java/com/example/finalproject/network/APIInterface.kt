@@ -6,10 +6,12 @@ import retrofit2.http.Query
 
 interface APIInterface {
     @GET("api/json/v1/1/random.php")
-    suspend fun getRandomProduct():Meal
+    suspend fun getRandomProduct():RandomProduct
 
     @GET("api/json/v1/1/search.php")
     suspend fun getMealBySearch(
         @Query("s") search: String
     ) : List<Meal>
+
+
 }
