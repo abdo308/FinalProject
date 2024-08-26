@@ -16,6 +16,7 @@ import com.example.finalproject.ui.HomeActivity
 import com.example.finalproject.R
 import com.example.finalproject.databinding.FragmentSignUpBinding
 import com.example.finalproject.db.LocalDataSourceImpl
+import com.example.finalproject.network.APIClient
 import com.example.finalproject.repo.ApplicationRepoImpl
 
 
@@ -77,7 +78,7 @@ class SignUpFragment : Fragment() {
 
     private fun initViewModel()
     {
-        val factory = SignUpViewModelFactory(ApplicationRepoImpl(LocalDataSourceImpl(requireContext())))
+        val factory = SignUpViewModelFactory(ApplicationRepoImpl(LocalDataSourceImpl(requireContext()),APIClient))
         viewModel = ViewModelProvider(this, factory).get(SignUpViewModel::class.java)
     }
 

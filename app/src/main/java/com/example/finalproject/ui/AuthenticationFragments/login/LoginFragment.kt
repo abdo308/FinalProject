@@ -16,6 +16,8 @@ import com.app.domain.models.UserAuthResponse
 import com.example.finalproject.R
 import com.example.finalproject.databinding.FragmentLoginBinding
 import com.example.finalproject.db.LocalDataSourceImpl
+import com.example.finalproject.network.APIClient
+import com.example.finalproject.network.RemoteDataSource
 import com.example.finalproject.repo.ApplicationRepoImpl
 import com.example.finalproject.ui.HomeActivity
 
@@ -68,7 +70,7 @@ class LoginFragment : Fragment() {
 
     private fun initViewModel() {
         val factory =
-            LoginViewModelFactory(ApplicationRepoImpl(LocalDataSourceImpl(requireContext())))
+            LoginViewModelFactory(ApplicationRepoImpl(LocalDataSourceImpl(requireContext()),APIClient))
         viewModel = ViewModelProvider(this, factory).get(LoginViewModel::class.java)
     }
 
