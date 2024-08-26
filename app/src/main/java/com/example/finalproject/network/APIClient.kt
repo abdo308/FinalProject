@@ -1,7 +1,7 @@
 package com.example.finalproject.network
 
 object APIClient :RemoteDataSource{
-    override suspend fun getRandomProduct(): Meal {
+    override suspend fun getRandomProduct(): RandomProduct {
         return API.retrofitService.getRandomProduct()
     }
 

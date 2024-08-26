@@ -21,4 +21,5 @@
     <color name="darkTextColorPrimary">#F1E6D0</color>
 
     <color name="dividerColor">#a8a5aa</color>
+    <color name="linkLikeColor">#1E88E5</color>
 </resources>

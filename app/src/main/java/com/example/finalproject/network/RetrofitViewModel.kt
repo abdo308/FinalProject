@@ -1,21 +1,17 @@
 package com.example.finalproject.network
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class RetrofitViewModel:ViewModel() {
-    private   val m=MealRepo()
-
-    fun getRandomProduct(){
-        viewModelScope.launch(Dispatchers.IO) {
-             val m=MealRepo()
-            Log.d("msg",m.getRandom().idMeal)
+class RetrofitViewModel(mealRepo: MealRepo):ViewModel() {
+    private val _meal = MutableLiveData<Meal>()
+    val meal: LiveData<Meal> = _meal
+    init{
+        viewModelScope.launch {
+            _meal.postValue(mealRepo.getRandom().meals[0])
         }
     }
 }
