@@ -22,6 +22,7 @@ class SignUpViewModel(private val authRepo: ApplicationRepository) : ViewModel()
     fun signUp(firstName: String, lastName: String, email: String, password: String)
     {
         var error = false
+        _signUpState.value = UserAuthResponse.Loading
 
         if (firstName.isEmpty()){
             _signUpState.value = UserAuthResponse.AuthFailed(Exception("FName"))
