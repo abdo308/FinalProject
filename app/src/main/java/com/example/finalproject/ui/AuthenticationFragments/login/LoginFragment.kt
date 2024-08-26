@@ -83,11 +83,6 @@ class LoginFragment : Fragment() {
 
         val email = binding.emailEditText.text.toString()
         val password = binding.passwordEditText.text.toString()
-        val sharedPreference=requireContext().getSharedPreferences("key", Context.MODE_PRIVATE)
-        with(sharedPreference.edit()){
-            putBoolean("isLoggedIn",true)
-            apply()
-        }
         viewModel.signIn(email, password)
     }
 
@@ -102,6 +97,11 @@ class LoginFragment : Fragment() {
                 }
 
                 is UserAuthResponse.AuthSuccessful -> {
+                    val sharedPreference=requireContext().getSharedPreferences("key", Context.MODE_PRIVATE)
+                    with(sharedPreference.edit()){
+                    putBoolean("isLoggedIn",true)
+                    apply()
+                    }
                     goToHomeScreen()
                     Log.d("Authentication", "Register success.")
                 }
