@@ -48,10 +48,10 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    implementation("com.airbnb.android:lottie:6.5.0")
-    implementation ("androidx.navigation:navigation-fragment-ktx:2.7.7")
+    implementation(libs.lottie)
+    implementation (libs.androidx.navigation.fragment.ktx)
     implementation ("com.google.android.material:material:1.9.0")
-    implementation ("androidx.navigation:navigation-ui-ktx:2.7.7")
+    implementation (libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.room.runtime)
     //noinspection KaptUsageInsteadOfKsp
@@ -74,4 +74,11 @@ dependencies {
     //coroutines
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
+
+    //Retrofit(API && gson && glide)
+    implementation(libs.gson)
+    implementation(libs.retrofit)
+    implementation (libs.gsonConverter)
+    implementation(libs.glide)
+
 }
