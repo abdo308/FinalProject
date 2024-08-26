@@ -1,5 +1,6 @@
 package com.example.finalproject.ui.AuthenticationFragments.login
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -24,7 +25,6 @@ import com.example.finalproject.ui.HomeActivity
 class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private lateinit var viewModel: LoginViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -83,7 +83,11 @@ class LoginFragment : Fragment() {
 
         val email = binding.emailEditText.text.toString()
         val password = binding.passwordEditText.text.toString()
-
+        val sharedPreference=requireContext().getSharedPreferences("key", Context.MODE_PRIVATE)
+        with(sharedPreference.edit()){
+            putBoolean("isLoggedIn",true)
+            apply()
+        }
         viewModel.signIn(email, password)
     }
 
