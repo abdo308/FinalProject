@@ -59,4 +59,9 @@
     </string>
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="about_us">About Us</string>
+    <string name="heart_button" />
+    <string name="imagefromapi" />
+    <string name="some_text_from_api" />
 </resources>
