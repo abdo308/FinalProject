@@ -7,5 +7,5 @@ interface ApplicationRepository {
 
     suspend fun getUserByEmail(email: String) : User?
     suspend fun insertNewUser(user: User)
-    suspend fun getMealBySearch(search: String): List<Meal>
+
 }

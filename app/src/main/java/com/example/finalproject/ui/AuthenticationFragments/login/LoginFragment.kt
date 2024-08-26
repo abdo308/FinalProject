@@ -70,7 +70,7 @@ class LoginFragment : Fragment() {
 
     private fun initViewModel() {
         val factory =
-            LoginViewModelFactory(ApplicationRepoImpl(LocalDataSourceImpl(requireContext()),APIClient))
+            LoginViewModelFactory(ApplicationRepoImpl(LocalDataSourceImpl(requireContext())))
         viewModel = ViewModelProvider(this, factory).get(LoginViewModel::class.java)
     }
 
