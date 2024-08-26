@@ -1,6 +1,6 @@
 package com.example.finalproject.repo
 
-import com.example.finalproject.User
+import com.example.finalproject.models.User
 import com.example.finalproject.db.LocalDataSource
 
 class ApplicationRepoImpl(private val localDataSource: LocalDataSource) : ApplicationRepository {
