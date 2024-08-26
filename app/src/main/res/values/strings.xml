@@ -9,4 +9,8 @@
     <string name="email">Email</string>
     <string name="welcome_to_recipe_app">Welcome to Recipe App</string>
     <string name="enterYourEmail">Enter Your Email</string>
+    <string name="login_welcome_text">Hi, Welcome Back! 👋</string>
+    <string name="fui_email_hint">Email</string>
+    <string name="fui_password_hint">Password</string>
+    <string name="fui_sign_in_default">Sign in</string>
 </resources>
