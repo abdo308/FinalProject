@@ -78,7 +78,7 @@ class SignUpFragment : Fragment() {
 
     private fun initViewModel()
     {
-        val factory = SignUpViewModelFactory(ApplicationRepoImpl(LocalDataSourceImpl(requireContext()),APIClient))
+        val factory = SignUpViewModelFactory(ApplicationRepoImpl(LocalDataSourceImpl(requireContext())))
         viewModel = ViewModelProvider(this, factory).get(SignUpViewModel::class.java)
     }
 
