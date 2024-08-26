@@ -13,4 +13,6 @@
     <string name="fui_email_hint">Email</string>
     <string name="fui_password_hint">Password</string>
     <string name="fui_sign_in_default">Sign in</string>
+    <string name="fui_name_hint">First &amp; Last name</string>
+    <string name="fui_title_register_email">Sign up</string>
 </resources>
