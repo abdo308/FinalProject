@@ -1,4 +1,4 @@
-package com.example.finalproject.AuthenticationFragments
+package com.example.finalproject.ui.AuthenticationFragments
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import com.airbnb.lottie.LottieAnimationView
 import com.example.finalproject.R
 

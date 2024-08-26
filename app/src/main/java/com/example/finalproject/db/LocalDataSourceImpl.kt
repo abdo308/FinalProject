@@ -1,7 +1,7 @@
 package com.example.finalproject.db
 
 import android.content.Context
-import com.example.finalproject.User
+import com.example.finalproject.models.User
 
 class LocalDataSourceImpl(context: Context) :LocalDataSource {
      var usersDao : UsersDao

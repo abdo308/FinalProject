@@ -1,13 +1,12 @@
 package com.example.finalproject.db
 
-import android.provider.ContactsContract.CommonDataKinds.Email
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.example.finalproject.User
+import com.example.finalproject.models.User
 
 @Dao
 interface UsersDao {

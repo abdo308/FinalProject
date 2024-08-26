@@ -1,7 +1,6 @@
-package com.example.finalproject.AuthenticationFragments.signup
+package com.example.finalproject.ui.AuthenticationFragments.signup
 
 import android.content.Intent
-import androidx.fragment.app.viewModels
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,15 +9,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.app.domain.models.UserAuthResponse
-import com.example.finalproject.HomeActivity
+import com.example.finalproject.ui.HomeActivity
 import com.example.finalproject.R
 import com.example.finalproject.databinding.FragmentSignUpBinding
+import com.example.finalproject.db.LocalDataSourceImpl
+import com.example.finalproject.repo.ApplicationRepoImpl
+
 
 class SignUpFragment : Fragment() {
     private lateinit var binding: FragmentSignUpBinding
-    private val viewModel: SignUpViewModel by viewModels()
+    private lateinit var viewModel: SignUpViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,17 +44,17 @@ class SignUpFragment : Fragment() {
             insets
         }
 
-
         //The sign up button listener
         binding.signUpBtn.setOnClickListener {
 
             hideAllSignUpErrors()
 
-            val name = binding.nameEditText.text.toString()
+            val fName = binding.firstNameEditText.text.toString()
+            val lName = binding.lastNameEditText.text.toString()
             val email = binding.emailEditText.text.toString()
             val password = binding.passwordEditText.text.toString()
 
-            viewModel.signUp(name, email, password)
+            viewModel.signUp(fName, lName, email, password)
         }
 
 
@@ -67,8 +70,15 @@ class SignUpFragment : Fragment() {
             binding.passwordTextInputLayout.error = null
         }
 
-        subscribeToObservers()
+        initViewModel()
 
+        subscribeToObservers()
+    }
+
+    private fun initViewModel()
+    {
+        val factory = SignUpViewModelFactory(ApplicationRepoImpl(LocalDataSourceImpl(requireContext())))
+        viewModel = ViewModelProvider(this, factory).get(SignUpViewModel::class.java)
     }
 
     private fun subscribeToObservers() {
@@ -107,20 +117,22 @@ class SignUpFragment : Fragment() {
 
     private fun showSignUpError(msg: String) {
         when (msg) {
-            "name" -> binding.nameTextInputLayout.error = "Name can't be empty."
+            "FName" -> binding.firstNameTextInputLayout.error = "First name can't be empty."
+            "LName" -> binding.lastNameTextInputLayout.error = "Last name can't be empty."
             "email" -> binding.emailTextInputLayout.error = "Invalid email format."
             "Password" -> binding.passwordTextInputLayout.error =
                 "Password must contain lower and " +
                         "upper characters, numbers and special characters, and be more than 8 characters long."
 
-            "The email address is already in use by another account." ->
-                binding.emailTextInputLayout.error = msg
+            "Duplicate email" ->
+                binding.emailTextInputLayout.error = "The email address is already in use by another account."
 
         }
     }
 
     private fun hideAllSignUpErrors() {
-        binding.nameTextInputLayout.error = null
+        binding.firstNameTextInputLayout.error = null
+        binding.lastNameTextInputLayout.error = null
         binding.emailTextInputLayout.error = null
         binding.passwordTextInputLayout.error = null
     }

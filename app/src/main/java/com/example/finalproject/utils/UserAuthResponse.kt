@@ -1,10 +1,10 @@
 package com.app.domain.models
 
-sealed class UserAuthResponse<out R>(){
+sealed class UserAuthResponse(){
     //The return value in case if the user authentication was successful
-    data class AuthSuccessful<out R>(val user: R) : UserAuthResponse<R>()
+    data object AuthSuccessful : UserAuthResponse()
     //The return value in case if the user authentication was a failure
-    data class AuthFailed(val exception: Exception) : UserAuthResponse<Nothing>()
+    data class AuthFailed(val exception: Exception) : UserAuthResponse()
     //The return value in case if the user authentication is in progress
-    data object Loading : UserAuthResponse<Nothing>()
+    data object Loading : UserAuthResponse()
 }

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundColor"
-    tools:context=".AuthenticationFragments.signup.SignUpFragment">
+    tools:context=".ui.AuthenticationFragments.signup.SignUpFragment">
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/backBtn"
@@ -56,13 +56,13 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/nameTextInputLayout"
+            android:id="@+id/firstNameTextInputLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_40sdp"
             android:layout_marginTop="@dimen/_30sdp"
             android:layout_marginEnd="@dimen/_40sdp"
-            android:hint="@string/fui_name_hint"
+            android:hint="@string/first_name"
             android:minWidth="@dimen/_260sdp"
             android:textColorHint="@color/black"
             app:boxStrokeColor="@android:color/darker_gray"
@@ -72,7 +72,7 @@
             app:layout_constraintTop_toBottomOf="@+id/materialTextView2">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/nameEditText"
+                android:id="@+id/firstNameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textEmailAddress"
@@ -81,6 +81,31 @@
                 tools:ignore="TextContrastCheck" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/lastNameTextInputLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_40sdp"
+            android:hint="@string/last_name"
+            android:minWidth="@dimen/_260sdp"
+            android:textColorHint="@color/black"
+            app:boxStrokeColor="@android:color/darker_gray"
+            app:errorEnabled="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/firstNameTextInputLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/lastNameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_15sdp"
+                tools:ignore="TextContrastCheck" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailTextInputLayout"
@@ -96,7 +121,7 @@
             app:errorEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/nameTextInputLayout">
+            app:layout_constraintTop_toBottomOf="@+id/lastNameTextInputLayout">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/emailEditText"
@@ -140,6 +165,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:backgroundTint="@color/primaryColor"
             android:layout_marginTop="@dimen/_15sdp"
             android:minWidth="@dimen/_260sdp"
             android:text="@string/fui_title_register_email"

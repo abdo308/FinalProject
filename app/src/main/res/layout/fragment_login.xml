@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/backgroundColor"
     android:orientation="vertical"
-    tools:context=".AuthenticationFragments.login.LoginFragment">
+    tools:context=".ui.AuthenticationFragments.login.LoginFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

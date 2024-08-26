@@ -1,4 +1,4 @@
-package com.example.finalproject
+package com.example.finalproject.ui
 
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
@@ -7,6 +7,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.example.finalproject.R
 import com.example.finalproject.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {

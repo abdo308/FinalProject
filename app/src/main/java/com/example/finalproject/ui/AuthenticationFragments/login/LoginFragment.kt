@@ -1,4 +1,4 @@
-package com.example.finalproject.AuthenticationFragments.login
+package com.example.finalproject.ui.AuthenticationFragments.login
 
 import android.os.Bundle
 import android.view.LayoutInflater

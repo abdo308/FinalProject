@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.example.finalproject.AuthenticationFragments.SplashFragment"
+        android:name="com.example.finalproject.ui.AuthenticationFragments.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash">
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.finalproject.AuthenticationFragments.login.LoginFragment"
+        android:name="com.example.finalproject.ui.AuthenticationFragments.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login">
         <action
@@ -30,7 +30,7 @@
 
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.example.finalproject.AuthenticationFragments.signup.SignUpFragment"
+        android:name="com.example.finalproject.ui.AuthenticationFragments.signup.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up">
         <action
