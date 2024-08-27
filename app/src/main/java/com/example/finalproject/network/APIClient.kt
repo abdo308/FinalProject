@@ -5,7 +5,7 @@ object APIClient :RemoteDataSource{
         return API.retrofitService.getRandomProduct()
     }
 
-    override suspend fun getMealBySearch(search: String): List<Meal> {
+    override suspend fun getMealBySearch(search: String): RandomProduct {
         return  API.retrofitService.getMealBySearch(search)
     }
 }

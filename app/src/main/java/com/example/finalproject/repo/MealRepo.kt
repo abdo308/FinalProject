@@ -5,5 +5,5 @@ import com.example.finalproject.network.RandomProduct
 
 interface MealRepo {
     suspend fun getRandom(): RandomProduct
-    suspend fun getMealBySearch(search: String): List<Meal>
+    suspend fun getMealBySearch(search: String): RandomProduct
 }

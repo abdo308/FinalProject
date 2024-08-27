@@ -6,6 +6,6 @@ interface RemoteDataSource {
     suspend fun getRandomProduct():RandomProduct
     suspend fun getMealBySearch(
         @Query("s") search: String
-    ) : List<Meal>
+    ) : RandomProduct
 
 }
