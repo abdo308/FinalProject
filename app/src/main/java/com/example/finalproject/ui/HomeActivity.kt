@@ -95,9 +95,9 @@ class HomeActivity : AppCompatActivity() {
             with(sharedPreference.edit()) {
                 putBoolean("isLoggedIn", false)
                 apply()
-                startActivity(intent)
-                finish()
             }
+            startActivity(intent)
+            finish()
         }
         noButton.setOnClickListener {
             dialog.hide()
