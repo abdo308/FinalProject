@@ -10,8 +10,8 @@ interface APIInterface {
 
     @GET("api/json/v1/1/search.php")
     suspend fun getMealBySearch(
-        @Query("s") search: String
-    ) : List<Meal>
+        @Query("f") search: String
+    ) : RandomProduct
 
 
 }

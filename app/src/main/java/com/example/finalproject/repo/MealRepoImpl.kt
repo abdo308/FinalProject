@@ -8,7 +8,7 @@ class MealRepoImpl(private val remoteDataSource: RemoteDataSource): MealRepo {
     override suspend fun getRandom(): RandomProduct {
         return remoteDataSource.getRandomProduct()
     }
-    override suspend fun getMealBySearch(search: String): List<Meal> {
+    override suspend fun getMealBySearch(search: String): RandomProduct {
         return remoteDataSource.getMealBySearch(search)
     }
 }
