@@ -7,10 +7,10 @@ import androidx.lifecycle.viewModelScope
 import com.example.finalproject.repo.MealRepo
 import kotlinx.coroutines.launch
 
-class RetrofitViewModel(mealRepo: MealRepo):ViewModel() {
+class RetrofitViewModel(private val mealRepo: MealRepo):ViewModel() {
     private val _meal = MutableLiveData<Meal>()
     val meal: LiveData<Meal> = _meal
-    init{
+    fun fetchRandom(){
         viewModelScope.launch {
             _meal.postValue(mealRepo.getRandom().meals[0])
         }
