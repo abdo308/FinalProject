@@ -14,5 +14,5 @@ data class UserFavourites(
     val email:String,
     @ColumnInfo(name = "favourites")
     @TypeConverters(MealConverter::class)
-    val favouriteMeals : List<Meal>
+    val favouriteMeals : MutableList<Meal>
 )

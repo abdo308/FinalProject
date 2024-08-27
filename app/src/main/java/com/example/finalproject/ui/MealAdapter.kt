@@ -12,6 +12,7 @@ import com.example.finalproject.R
 import com.example.finalproject.network.Meal
 
 class MealAdapter(private val meals: Meal,private val context: View) : RecyclerView.Adapter<MealAdapter.MealViewHolder>() {
+    private var isLiked = false
 
     inner class MealViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var mealImage: ImageView = itemView.findViewById(R.id.imageView)
@@ -35,6 +36,16 @@ class MealAdapter(private val meals: Meal,private val context: View) : RecyclerV
         holder.title.text=meal.strMeal
         holder.mealImage.setOnClickListener {
             Navigation.findNavController(context).navigate(R.id.action_from_home_to_details)
+        }
+        holder.heartIcon.setImageResource(
+            if (isLiked) R.drawable.heart_dark else R.drawable.heart
+        )
+        holder.heartIcon.setOnClickListener {
+            isLiked=!isLiked
+            if(isLiked)
+                holder.heartIcon.setImageResource(R.drawable.heart)
+            else
+                holder.heartIcon.setImageResource(R.drawable.heart_dark)
         }
     }
 
