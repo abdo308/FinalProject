@@ -1,31 +1,34 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:gravity="center">
 
     <androidx.cardview.widget.CardView
         android:layout_width="280dp"
-        android:layout_height="280dp"
-        android:layout_margin="16dp"
+        android:layout_height="240dp"
         android:background="@color/primaryColor"
-        app:cardCornerRadius="25dp"
-        app:cardElevation="50dp">
+        app:cardElevation="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+   >
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp">
+                android:layout_height="150dp">
 
                 <ImageView
                     android:id="@+id/imageView"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="match_parent"
                     android:contentDescription="@string/imagefromapi"
                     android:scaleType="centerCrop"
                     android:src="@drawable/ic_launcher_background" />
@@ -34,22 +37,24 @@
                     android:id="@+id/imageButton"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/heart"
                     android:layout_gravity="bottom|start"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:background="@android:color/transparent"
-                    android:contentDescription="@string/heart_button" />
+
+
+                    android:background="@android:color/white"
+                    android:backgroundTint="@color/white"
+                    android:contentDescription="@string/heart_button"
+                    android:src="@drawable/heart" />
             </FrameLayout>
 
             <TextView
+                android:id="@+id/cardText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/some_text_from_api"
+                android:layout_height="match_parent"
+                android:text="some_text_from_api"
                 android:textAlignment="center"
                 android:textColor="@color/primaryColor"
                 android:textSize="28sp" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
