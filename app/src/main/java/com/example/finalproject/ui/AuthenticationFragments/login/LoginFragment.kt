@@ -1,5 +1,6 @@
 package com.example.finalproject.ui.AuthenticationFragments.login
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -15,6 +16,8 @@ import com.app.domain.models.UserAuthResponse
 import com.example.finalproject.R
 import com.example.finalproject.databinding.FragmentLoginBinding
 import com.example.finalproject.db.LocalDataSourceImpl
+import com.example.finalproject.network.APIClient
+import com.example.finalproject.network.RemoteDataSource
 import com.example.finalproject.repo.ApplicationRepoImpl
 import com.example.finalproject.ui.HomeActivity
 
@@ -24,7 +27,6 @@ import com.example.finalproject.ui.HomeActivity
 class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private lateinit var viewModel: LoginViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -83,7 +85,6 @@ class LoginFragment : Fragment() {
 
         val email = binding.emailEditText.text.toString()
         val password = binding.passwordEditText.text.toString()
-
         viewModel.signIn(email, password)
     }
 
@@ -98,6 +99,11 @@ class LoginFragment : Fragment() {
                 }
 
                 is UserAuthResponse.AuthSuccessful -> {
+                    val sharedPreference=requireContext().getSharedPreferences("key", Context.MODE_PRIVATE)
+                    with(sharedPreference.edit()){
+                    putBoolean("isLoggedIn",true)
+                    apply()
+                    }
                     goToHomeScreen()
                     Log.d("Authentication", "Register success.")
                 }

@@ -1,6 +1,7 @@
 package com.example.finalproject.repo
 
 import com.example.finalproject.models.User
+import com.example.finalproject.network.Meal
 
 interface ApplicationRepository {
 

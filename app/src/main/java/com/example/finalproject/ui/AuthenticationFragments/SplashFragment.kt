@@ -2,6 +2,8 @@ package com.example.finalproject.ui.AuthenticationFragments
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +12,7 @@ import android.view.ViewGroup
 import androidx.navigation.Navigation
 import com.airbnb.lottie.LottieAnimationView
 import com.example.finalproject.R
+import com.example.finalproject.ui.HomeActivity
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -38,6 +41,7 @@ class SplashFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_splash, container, false)
     }
 
@@ -49,6 +53,14 @@ class SplashFragment : Fragment() {
         lottie.addAnimatorListener(object : AnimatorListenerAdapter(){
             override fun onAnimationEnd(animation: Animator) {
                 super.onAnimationEnd(animation)
+                //Get the shared Preference and see if LoggedIn or not
+                val sharedPreferences = requireContext().getSharedPreferences("key", Context.MODE_PRIVATE)
+                val check=sharedPreferences.getBoolean("isLoggedIn",false)
+                if(check){
+                    val intent = Intent(requireContext(), HomeActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                }
                 Navigation.findNavController(view).navigate(R.id.from_splash_to_login)
             }
         })
