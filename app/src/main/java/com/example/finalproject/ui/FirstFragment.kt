@@ -1,7 +1,9 @@
 package com.example.finalproject.ui
 
 import MealAdapter
+import android.graphics.Color
 import android.graphics.Rect
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -53,7 +55,6 @@ private var _binding: FragmentFirstBinding? = null
         super.onViewCreated(view, savedInstanceState)
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-
         viewModel.meal.observe(viewLifecycleOwner) { meals ->
             val mealAdapter = MealAdapter(meals,requireView())
             recyclerView.adapter = mealAdapter
