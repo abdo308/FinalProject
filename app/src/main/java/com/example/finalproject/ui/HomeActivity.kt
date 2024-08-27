@@ -2,11 +2,15 @@ package com.example.finalproject.ui
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.speech.AlternativeSpan
 import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.snackbar.Snackbar
@@ -17,6 +21,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.finalproject.R
 import com.example.finalproject.databinding.ActivityHomeBinding
+import com.google.android.material.card.MaterialCardView
 
 class HomeActivity : AppCompatActivity() {
 
@@ -75,10 +80,15 @@ class HomeActivity : AppCompatActivity() {
     }
 
     fun showConfirmationMessage() {
+        val dialogView = layoutInflater.inflate(R.layout.confirmation_message_view,null)
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("Sign Out")
-        builder.setMessage("Are you sure you want to sign out?")
-        builder.setPositiveButton("Yes") { dialog, which ->
+        builder.setView(dialogView)
+        val dialog = builder.create()
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.show()
+        val yesButton = dialogView.findViewById<Button>(R.id.button_yes)
+        val noButton = dialogView.findViewById<Button>(R.id.button_no)
+        yesButton.setOnClickListener{
             val intent = Intent(this, MainActivity::class.java)
             val sharedPreference = getSharedPreferences("key", Context.MODE_PRIVATE)
             Toast.makeText(this,"Signed Out Successfully",Toast.LENGTH_LONG).show()
@@ -89,11 +99,9 @@ class HomeActivity : AppCompatActivity() {
                 finish()
             }
         }
-        builder.setNegativeButton("No"){
-                dialog, which ->
+        noButton.setOnClickListener {
+            dialog.hide()
         }
-        val dialog: AlertDialog = builder.create()
-        dialog.window?.setGravity(Gravity.CENTER)
-        dialog.show()
+
     }
 }
