@@ -59,6 +59,16 @@ private var _binding: FragmentFirstBinding? = null
         }
         viewModel.fetchRandom()
 
+//        val recyclerView2 = view.findViewById<RecyclerView>(R.id.recyclerView2)
+//        recyclerView2.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+//
+//        viewModel.mealCollection.observe(viewLifecycleOwner){meals->
+//                val mealAdapter=MealAdapterCollection(meals,requireView())
+//                recyclerView2.adapter=mealAdapter
+//        }
+//        viewModel.fetchRandomCollection()
+
+
     }
 
     override fun onResume() {
