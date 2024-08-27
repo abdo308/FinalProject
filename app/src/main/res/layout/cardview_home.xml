@@ -3,18 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
     android:gravity="center">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="280dp"
         android:layout_height="240dp"
-        android:background="@color/primaryColor"
-        app:cardElevation="50dp"
+        android:background="@android:color/transparent"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-   >
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -41,7 +43,6 @@
 
 
                     android:background="@android:color/white"
-                    android:backgroundTint="@color/white"
                     android:contentDescription="@string/heart_button"
                     android:src="@drawable/heart" />
             </FrameLayout>

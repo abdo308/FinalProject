@@ -8,7 +8,12 @@ import androidx.lifecycle.viewModelScope
 import com.example.finalproject.repo.MealRepo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlin.random.Random
 
+fun getRandomCharacter(chars: String): Char {
+    val randomIndex = Random.nextInt(chars.length)
+    return chars[randomIndex]
+}
 class RetrofitViewModel(private val mealRepo: MealRepo):ViewModel() {
     private val _meal = MutableLiveData<Meal>()
     private val _mealCollection=MutableLiveData<List<Meal>>()
@@ -22,7 +27,8 @@ class RetrofitViewModel(private val mealRepo: MealRepo):ViewModel() {
     fun fetchRandomCollection(){
 
         viewModelScope.launch(Dispatchers.IO){
-            _mealCollection.postValue(mealRepo.getMealBySearch("a").meals)
+            val x= getRandomCharacter("abcdefghijklmnopqrstuvwxyz")
+            _mealCollection.postValue(mealRepo.getMealBySearch(x.toString()).meals)
         }
     }
 }
