@@ -1,5 +1,4 @@
 package com.example.finalproject.ui
-
 import MealAdapter
 import android.graphics.Color
 import android.graphics.Rect

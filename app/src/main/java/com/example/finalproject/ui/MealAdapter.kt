@@ -46,41 +46,41 @@ class MealAdapter(private val meals: Meal,private val context: View,private val 
         // see if in the list make the love if not don't make it
         CoroutineScope(Dispatchers.IO).launch {
             val userData=userdao.getDataUser(email)
-                val list_favourite= userData.favouriteMeals
-                val x=list_favourite.find { it.idMeal==meal.idMeal }
-                withContext(Dispatchers.Main) {
-                    if(x==null){
-                        holder.heartIcon.setImageResource(R.drawable.baseline_favorite_border_24)
-                    }
-                    else{
-                        holder.heartIcon.setImageResource(R.drawable.baseline_favorite_24)
-                    }
+            val list_favourite= userData.favouriteMeals
+            val x=list_favourite.find { it.idMeal==meal.idMeal }
+            withContext(Dispatchers.Main) {
+                if(x==null){
+                    holder.heartIcon.setImageResource(R.drawable.baseline_favorite_border_24)
                 }
+                else{
+                    holder.heartIcon.setImageResource(R.drawable.baseline_favorite_24)
+                }
+            }
 
 
         }
         //===========================================
 
-            holder.heartIcon.setOnClickListener {
-                CoroutineScope(Dispatchers.IO).launch {
-                    val userData=userdao.getDataUser(email)
-                        val list_favourite= userData.favouriteMeals
-                        val x=list_favourite.find { it.idMeal==meal.idMeal }
-                        withContext(Dispatchers.Main){
-                            if(x==null){
-                                list_favourite.add(meal)
-                                holder.heartIcon.setImageResource(R.drawable.baseline_favorite_24)
-                            }
-                            else{
-                                list_favourite.remove(meal)
-                                holder.heartIcon.setImageResource(R.drawable.baseline_favorite_border_24)
-                            }
-                        }
-                        userdao.updateData(userData.email,list_favourite)
+        holder.heartIcon.setOnClickListener {
+            CoroutineScope(Dispatchers.IO).launch {
+                val userData=userdao.getDataUser(email)
+                val list_favourite= userData.favouriteMeals
+                val x=list_favourite.find { it.idMeal==meal.idMeal }
+                withContext(Dispatchers.Main){
+                    if(x==null){
+                        list_favourite.add(meal)
+                        holder.heartIcon.setImageResource(R.drawable.baseline_favorite_24)
                     }
-
-
+                    else{
+                        list_favourite.remove(meal)
+                        holder.heartIcon.setImageResource(R.drawable.baseline_favorite_border_24)
+                    }
+                }
+                userdao.updateData(userData.email,list_favourite)
             }
+
+
+        }
         //==============================================
 
         holder.mealImage.setOnClickListener {
