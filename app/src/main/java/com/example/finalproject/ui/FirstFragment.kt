@@ -1,6 +1,5 @@
 package com.example.finalproject.ui
-
-import com.example.finalproject.ui.MealAdapter
+import MealAdapter
 import android.graphics.Color
 import android.graphics.Rect
 import android.graphics.drawable.ColorDrawable
