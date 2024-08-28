@@ -1,5 +1,6 @@
 package com.example.finalproject.ui.AuthenticationFragments.signup
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -54,7 +55,6 @@ class SignUpFragment : Fragment() {
             val lName = binding.lastNameEditText.text.toString()
             val email = binding.emailEditText.text.toString()
             val password = binding.passwordEditText.text.toString()
-
             viewModel.signUp(fName, lName, email, password)
         }
 
@@ -95,6 +95,7 @@ class SignUpFragment : Fragment() {
                 }
 
                 is UserAuthResponse.AuthSuccessful -> {
+
                     goToHomeScreen()
                     Log.d("Authentication", "Register success.")
                 }
@@ -111,6 +112,13 @@ class SignUpFragment : Fragment() {
     }
 
     private fun goToHomeScreen() {
+        val sharedPreferecne=requireContext().getSharedPreferences("key", Context.MODE_PRIVATE)
+        val email=binding.emailEditText.text.toString()
+        with(sharedPreferecne.edit()){
+            putBoolean("isLoggedIn",true)
+            putString("Email",email)
+            apply()
+        }
         val intent = Intent(this.context, HomeActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)

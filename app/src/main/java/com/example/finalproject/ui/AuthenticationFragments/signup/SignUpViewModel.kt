@@ -8,6 +8,8 @@ import com.app.domain.models.UserAuthResponse
 import com.app.utils.isValidEmail
 import com.app.utils.isValidPassword
 import com.example.finalproject.models.User
+import com.example.finalproject.models.UserFavourites
+import com.example.finalproject.network.Meal
 import com.example.finalproject.repo.ApplicationRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -64,7 +66,8 @@ class SignUpViewModel(private val authRepo: ApplicationRepository) : ViewModel()
             }
             else{
                 authRepo.insertNewUser(User(email, password, firstName, lastName))
-
+                //insert in the new table
+                authRepo.addUser(UserFavourites(email, mutableListOf()))
                 withContext(Dispatchers.Main)
                 {
                     _signUpState.value = UserAuthResponse.AuthSuccessful

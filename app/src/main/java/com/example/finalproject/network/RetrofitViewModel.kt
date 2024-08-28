@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.finalproject.repo.MealRepo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.net.SocketTimeoutException
 import kotlin.random.Random
 
 fun getRandomCharacter(chars: String): Char {
@@ -22,26 +23,41 @@ class RetrofitViewModel(private val mealRepo: MealRepo):ViewModel() {
     val mealCollection:LiveData<List<Meal>> = _mealCollection
     val mealsListBySearch : LiveData<List<Meal>> = _mealsListBySearch
     fun fetchRandom(){
+        try {
         viewModelScope.launch(Dispatchers.IO) {
             _meal.postValue(mealRepo.getRandom().meals[0])
         }
+        }
+        catch (exception: SocketTimeoutException){
+            Log.d("fetchError","ConnectionTimeOut")
+        }
+        catch (exception: Exception) {
+            // Handle other exceptions
+            Log.e("fetchError", "Unexpected error: ${exception.message}")
+        }
     }
-    fun fetchRandomCollection(){
-
-        viewModelScope.launch(Dispatchers.IO){
-            val x= getRandomCharacter("abcdefghijklmnopqrstuvwxyz")
-            val response = mealRepo.getMealBySearch(x.toString())
-            val list =response.body()?.meals ?: emptyList()
-            if(response.isSuccessful)
-            _mealCollection.postValue(list)
+    fun fetchRandomCollection() {
+        try {
+            viewModelScope.launch(Dispatchers.IO) {
+                val x = getRandomCharacter("abcdefghijklmnopqrstuvwxyz")
+                _mealCollection.postValue(mealRepo.getMealBySearch(x.toString()).body()?.meals)
+            }
+        }
+        catch (exception: SocketTimeoutException){
+            Log.d("fetchError","ConnectionTimeOut")
+        }
+        catch (exception: Exception) {
+            // Handle other exceptions
+            Log.e("fetchError", "Unexpected error: ${exception.message}")
         }
     }
     fun getMealsListBySearch(search : String){
-        viewModelScope.launch(Dispatchers.IO){
+        viewModelScope.launch(Dispatchers.IO) {
             val response = mealRepo.getMealBySearch(search)
-            val list =response.body()?.meals ?: emptyList()
-            if(response.isSuccessful)
-            _mealsListBySearch.postValue(list)
+            val meals = response.body()?.meals ?: emptyList()
+            if (response.isSuccessful)
+                _mealsListBySearch.postValue(meals)
         }
     }
+
 }

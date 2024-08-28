@@ -89,6 +89,7 @@ class HomeActivity : AppCompatActivity() {
             Toast.makeText(this,"Signed Out Successfully",Toast.LENGTH_LONG).show()
             with(sharedPreference.edit()) {
                 putBoolean("isLoggedIn", false)
+                putString("Email",null)
                 apply()
             }
             startActivity(intent)
