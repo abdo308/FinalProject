@@ -7,6 +7,8 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.example.finalproject.models.User
+import com.example.finalproject.models.UserFavourites
+import com.example.finalproject.network.Meal
 
 @Dao
 interface UsersDao {
@@ -25,4 +27,13 @@ interface UsersDao {
 
     @Delete
     suspend fun deleteUser(user: User)
+    @Query("select * from users_favourites where email=:email")
+    suspend fun getDataUser(email:String?):UserFavourites
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun addUser(userFavourites: UserFavourites)
+
+    @Query("update users_favourites set favourites=:list where email=:email")
+    suspend fun updateData(email: String,list:MutableList<Meal>)
+
+
 }

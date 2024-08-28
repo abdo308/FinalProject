@@ -1,4 +1,6 @@
 import android.content.Context
+import android.service.autofill.UserData
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,11 +11,15 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
+import com.example.finalproject.db.UsersDao
+import com.example.finalproject.models.UserFavourites
 import com.example.finalproject.network.Meal
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class MealAdapter(private val meals: Meal,private val context: View) : RecyclerView.Adapter<MealAdapter.MealViewHolder>() {
-    private var isLiked = false
-
+class MealAdapter(private val meals: Meal,private val context: View,private val context2: Context,private val userdao:UsersDao) : RecyclerView.Adapter<MealAdapter.MealViewHolder>() {
     inner class MealViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var mealImage: ImageView = itemView.findViewById(R.id.imageView)
         var title=itemView.findViewById<TextView>(R.id.cardText)
@@ -27,6 +33,8 @@ class MealAdapter(private val meals: Meal,private val context: View) : RecyclerV
 
     override fun onBindViewHolder(holder: MealViewHolder, position: Int) {
         val meal = meals
+        val sharedPreferences = context2.getSharedPreferences("key", Context.MODE_PRIVATE)
+        val email=sharedPreferences.getString("Email","NoEmail")
         Glide.with(holder.itemView.context)
             .load(meal.strMealThumb)
             .placeholder(R.drawable.baseline_downloading_24)
@@ -34,18 +42,49 @@ class MealAdapter(private val meals: Meal,private val context: View) : RecyclerV
             .into(holder.mealImage)
 
         holder.title.text=meal.strMeal
+        //===========================================
+        // see if in the list make the love if not don't make it
+        CoroutineScope(Dispatchers.IO).launch {
+            val userData=userdao.getDataUser(email)
+                val list_favourite= userData.favouriteMeals
+                val x=list_favourite.find { it.idMeal==meal.idMeal }
+                withContext(Dispatchers.Main) {
+                    if(x==null){
+                        holder.heartIcon.setImageResource(R.drawable.baseline_favorite_border_24)
+                    }
+                    else{
+                        holder.heartIcon.setImageResource(R.drawable.baseline_favorite_24)
+                    }
+                }
+
+
+        }
+        //===========================================
+
+            holder.heartIcon.setOnClickListener {
+                CoroutineScope(Dispatchers.IO).launch {
+                    val userData=userdao.getDataUser(email)
+                        val list_favourite= userData.favouriteMeals
+                        val x=list_favourite.find { it.idMeal==meal.idMeal }
+                        withContext(Dispatchers.Main){
+                            if(x==null){
+                                list_favourite.add(meal)
+                                holder.heartIcon.setImageResource(R.drawable.baseline_favorite_24)
+                            }
+                            else{
+                                list_favourite.remove(meal)
+                                holder.heartIcon.setImageResource(R.drawable.baseline_favorite_border_24)
+                            }
+                        }
+                        userdao.updateData(userData.email,list_favourite)
+                    }
+
+
+            }
+        //==============================================
+
         holder.mealImage.setOnClickListener {
             Navigation.findNavController(context).navigate(R.id.action_from_home_to_details)
-        }
-        holder.heartIcon.setImageResource(
-            if (isLiked) R.drawable.heart_dark else R.drawable.heart
-        )
-        holder.heartIcon.setOnClickListener {
-            isLiked=!isLiked
-            if(isLiked)
-                holder.heartIcon.setImageResource(R.drawable.heart)
-            else
-                holder.heartIcon.setImageResource(R.drawable.heart_dark)
         }
     }
 

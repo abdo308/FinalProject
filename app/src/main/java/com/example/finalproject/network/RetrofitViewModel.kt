@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.finalproject.repo.MealRepo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.net.SocketTimeoutException
 import kotlin.random.Random
 
 fun getRandomCharacter(chars: String): Char {
@@ -20,15 +21,33 @@ class RetrofitViewModel(private val mealRepo: MealRepo):ViewModel() {
     val meal: LiveData<Meal> = _meal
     val mealCollection:LiveData<List<Meal>> = _mealCollection
     fun fetchRandom(){
+        try {
         viewModelScope.launch(Dispatchers.IO) {
             _meal.postValue(mealRepo.getRandom().meals[0])
         }
-    }
-    fun fetchRandomCollection(){
-
-        viewModelScope.launch(Dispatchers.IO){
-            val x= getRandomCharacter("abcdefghijklmnopqrstuvwxyz")
-            _mealCollection.postValue(mealRepo.getMealBySearch(x.toString()).meals)
+        }
+        catch (exception: SocketTimeoutException){
+            Log.d("fetchError","ConnectionTimeOut")
+        }
+        catch (exception: Exception) {
+            // Handle other exceptions
+            Log.e("fetchError", "Unexpected error: ${exception.message}")
         }
     }
+    fun fetchRandomCollection() {
+        try {
+            viewModelScope.launch(Dispatchers.IO) {
+                val x = getRandomCharacter("abcdefghijklmnopqrstuvwxyz")
+                _mealCollection.postValue(mealRepo.getMealBySearch(x.toString()).meals)
+            }
+        }
+        catch (exception: SocketTimeoutException){
+            Log.d("fetchError","ConnectionTimeOut")
+        }
+        catch (exception: Exception) {
+            // Handle other exceptions
+            Log.e("fetchError", "Unexpected error: ${exception.message}")
+        }
+    }
+
 }

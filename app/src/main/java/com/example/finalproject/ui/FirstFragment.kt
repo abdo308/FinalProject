@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.graphics.Rect
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
@@ -20,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.room.util.recursiveFetchArrayMap
 import com.example.finalproject.R
 import com.example.finalproject.databinding.FragmentFirstBinding
+import com.example.finalproject.db.ApplicationDataBase
 import com.example.finalproject.network.APIClient
 import com.example.finalproject.network.RemoteDataSource
 import com.example.finalproject.network.RetrofitViewModel
@@ -54,9 +56,12 @@ private var _binding: FragmentFirstBinding? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
+        val database = ApplicationDataBase.getInstance(requireContext())
+        val userDao = database.userDao()
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
         viewModel.meal.observe(viewLifecycleOwner) { meals ->
-            val mealAdapter = MealAdapter(meals,requireView())
+            val mealAdapter = MealAdapter(meals,requireView(), requireContext(),userDao)
             recyclerView.adapter = mealAdapter
         }
         viewModel.fetchRandom()
@@ -67,24 +72,12 @@ private var _binding: FragmentFirstBinding? = null
         val itemSpacing = 50
         recyclerView2.addItemDecoration(ItemSpacingDecoration(itemSpacing))
         viewModel.mealCollection.observe(viewLifecycleOwner){meals->
-            val mealAdapter=MealAdapterCollection(meals,requireView())
-            recyclerView2.adapter=mealAdapter
+                val mealAdapter=MealAdapterCollection(meals,requireView(),requireContext(),userDao)
+                recyclerView2.adapter=mealAdapter
         }
         viewModel.fetchRandomCollection()
 
 
-    }
-
-    override fun onResume() {
-        super.onResume()
-//        val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerView)
-//        recyclerView?.layoutManager = LinearLayoutManager(requireContext())
-//
-//        viewModel.meal.observe(viewLifecycleOwner) { meals ->
-//            val mealAdapter = MealAdapter(meals,requireView())
-//            recyclerView?.adapter = mealAdapter
-//        }
-//        viewModel.fetchRandom()
     }
 
 override fun onDestroyView() {
