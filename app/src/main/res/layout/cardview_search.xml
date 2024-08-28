@@ -1,16 +1,18 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/transparent"
     android:gravity="center">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="280dp"
-        android:layout_height="240dp"
-        android:layout_marginBottom="20dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="25dp"
         android:background="@android:color/transparent"
         app:cardCornerRadius="30dp"
         app:cardElevation="0dp"
@@ -29,7 +31,7 @@
                 android:layout_height="150dp">
 
                 <ImageView
-                    android:id="@+id/imageView"
+                    android:id="@+id/searchView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:contentDescription="@string/imagefromapi"
@@ -37,7 +39,7 @@
                     android:src="@drawable/ic_launcher_background" />
 
                 <ImageButton
-                    android:id="@+id/imageButton"
+                    android:id="@+id/searchImageButton"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="bottom|start"
@@ -49,7 +51,7 @@
             </FrameLayout>
 
             <TextView
-                android:id="@+id/cardText"
+                android:id="@+id/searchCardText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="some_text_from_api"

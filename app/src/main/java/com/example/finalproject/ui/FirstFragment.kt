@@ -1,27 +1,19 @@
 package com.example.finalproject.ui
 
-import MealAdapter
-import android.graphics.Color
+import com.example.finalproject.adapters.MealAdapter
 import android.graphics.Rect
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.util.recursiveFetchArrayMap
 import com.example.finalproject.R
+import com.example.finalproject.adapters.MealAdapterCollection
 import com.example.finalproject.databinding.FragmentFirstBinding
 import com.example.finalproject.network.APIClient
-import com.example.finalproject.network.RemoteDataSource
 import com.example.finalproject.network.RetrofitViewModel
 import com.example.finalproject.network.ViewModelFactory
 import com.example.finalproject.repo.MealRepoImpl
@@ -67,7 +59,7 @@ private var _binding: FragmentFirstBinding? = null
         val itemSpacing = 50
         recyclerView2.addItemDecoration(ItemSpacingDecoration(itemSpacing))
         viewModel.mealCollection.observe(viewLifecycleOwner){meals->
-            val mealAdapter=MealAdapterCollection(meals,requireView())
+            val mealAdapter= MealAdapterCollection(meals,requireView())
             recyclerView2.adapter=mealAdapter
         }
         viewModel.fetchRandomCollection()
@@ -81,7 +73,7 @@ private var _binding: FragmentFirstBinding? = null
 //        recyclerView?.layoutManager = LinearLayoutManager(requireContext())
 //
 //        viewModel.meal.observe(viewLifecycleOwner) { meals ->
-//            val mealAdapter = MealAdapter(meals,requireView())
+//            val mealAdapter = com.example.finalproject.adapters.MealAdapter(meals,requireView())
 //            recyclerView?.adapter = mealAdapter
 //        }
 //        viewModel.fetchRandom()

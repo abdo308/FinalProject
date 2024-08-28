@@ -17,8 +17,10 @@ fun getRandomCharacter(chars: String): Char {
 class RetrofitViewModel(private val mealRepo: MealRepo):ViewModel() {
     private val _meal = MutableLiveData<Meal>()
     private val _mealCollection=MutableLiveData<List<Meal>>()
+    private val _mealsListBySearch = MutableLiveData<List<Meal>>()
     val meal: LiveData<Meal> = _meal
     val mealCollection:LiveData<List<Meal>> = _mealCollection
+    val mealsListBySearch : LiveData<List<Meal>> = _mealsListBySearch
     fun fetchRandom(){
         viewModelScope.launch(Dispatchers.IO) {
             _meal.postValue(mealRepo.getRandom().meals[0])
@@ -28,7 +30,18 @@ class RetrofitViewModel(private val mealRepo: MealRepo):ViewModel() {
 
         viewModelScope.launch(Dispatchers.IO){
             val x= getRandomCharacter("abcdefghijklmnopqrstuvwxyz")
-            _mealCollection.postValue(mealRepo.getMealBySearch(x.toString()).meals)
+            val response = mealRepo.getMealBySearch(x.toString())
+            val list =response.body()?.meals ?: emptyList()
+            if(response.isSuccessful)
+            _mealCollection.postValue(list)
+        }
+    }
+    fun getMealsListBySearch(search : String){
+        viewModelScope.launch(Dispatchers.IO){
+            val response = mealRepo.getMealBySearch(search)
+            val list =response.body()?.meals ?: emptyList()
+            if(response.isSuccessful)
+            _mealsListBySearch.postValue(list)
         }
     }
 }

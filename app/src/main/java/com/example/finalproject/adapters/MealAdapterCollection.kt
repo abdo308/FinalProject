@@ -1,4 +1,4 @@
-package com.example.finalproject.ui
+package com.example.finalproject.adapters
 
 import android.view.LayoutInflater
 import android.view.View

@@ -9,7 +9,7 @@
         android:icon="@drawable/heart"
         android:title="Favourite" />
     <item
-        android:id="@+id/search"
+        android:id="@+id/action_search"
         android:icon="@drawable/baseline_search_24"
         android:title="Search" />
 </menu>
