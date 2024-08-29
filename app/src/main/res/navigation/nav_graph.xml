@@ -48,6 +48,9 @@
         android:name="com.example.finalproject.ui.DetailsFragment"
         android:label="fragment_details"
         tools:layout="@layout/fragment_details">
+        <argument
+            android:name="meal"
+            app:argType="com.example.finalproject.network.Meal" />
         <action
             android:id="@+id/action_detailsFragment_to_aboutUsFragment"
             app:destination="@id/aboutUsFragment" />
@@ -60,9 +63,6 @@
         <action
             android:id="@+id/action_searchFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
-        <action
-            android:id="@+id/action_searchFragment_to_aboutUsFragment"
-            app:destination="@id/aboutUsFragment" />
     </fragment>
 
 </navigation>

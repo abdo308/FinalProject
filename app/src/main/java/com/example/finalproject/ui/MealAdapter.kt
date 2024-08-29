@@ -5,12 +5,14 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
 import com.example.finalproject.db.UsersDao
 import com.example.finalproject.network.Meal
+import com.example.finalproject.ui.FirstFragmentDirections
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -81,7 +83,8 @@ class MealAdapter(private val meals: Meal,private val context: View,private val 
         //==============================================
 
         holder.mealImage.setOnClickListener {
-            Navigation.findNavController(context).navigate(R.id.action_from_home_to_details)
+            val direction = FirstFragmentDirections.actionFromHomeToDetails(meals)
+            Navigation.findNavController(context).navigate(direction)
         }
     }
 

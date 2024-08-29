@@ -69,4 +69,6 @@
     <string name="no">No</string>
     <string name="yes">Yes</string>
     <string name="search">Search</string>
+    <string name="show_more">show more\n</string>
+    <string name="show_less">show less</string>
 </resources>
