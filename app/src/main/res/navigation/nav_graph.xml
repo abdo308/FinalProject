@@ -51,6 +51,9 @@
         <argument
             android:name="meal"
             app:argType="com.example.finalproject.network.Meal" />
+        <action
+            android:id="@+id/action_detailsFragment_to_aboutUsFragment"
+            app:destination="@id/aboutUsFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"

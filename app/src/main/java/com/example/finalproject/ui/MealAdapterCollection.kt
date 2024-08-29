@@ -23,7 +23,7 @@ import kotlinx.coroutines.withContext
 class MealAdapterCollection(private val meals:List<Meal>, private val context:View, private val context2: Context,private val userdao:UsersDao): RecyclerView.Adapter<MealAdapterCollection.MealViewHolder>() {
     private val likeMap:MutableMap<String?,Boolean> = mutableMapOf()
     inner class MealViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var mealImage: ImageView = itemView.findViewById(R.id.imageView)
+        var mealImage: ImageView = itemView.findViewById(R.id.searchField)
         var title=itemView.findViewById<TextView>(R.id.cardText)
         var heartIcon=itemView.findViewById<ImageButton>(R.id.imageButton)
     }
@@ -45,20 +45,19 @@ class MealAdapterCollection(private val meals:List<Meal>, private val context:Vi
         holder.title.text=meal.strMeal
 
         CoroutineScope(Dispatchers.IO).launch {
-            val userData=userdao.getDataUser(email)
-            val list_favourite= userData.favouriteMeals
-            val x=list_favourite.find { it.idMeal==meal.idMeal }
+            val userData = userdao.getDataUser(email)
+            val list_favourite = userData.favouriteMeals
+            val x = list_favourite.find { it.idMeal == meal.idMeal }
             withContext(Dispatchers.Main) {
-                if(x==null){
+                if (x == null) {
                     holder.heartIcon.setImageResource(R.drawable.baseline_favorite_border_24)
-                }
-                else{
+                } else {
                     holder.heartIcon.setImageResource(R.drawable.baseline_favorite_24)
                 }
             }
-
-
         }
+
+
         holder.heartIcon.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
                 val userData=userdao.getDataUser(email)

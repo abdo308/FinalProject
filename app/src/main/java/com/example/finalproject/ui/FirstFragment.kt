@@ -32,7 +32,7 @@ import com.example.finalproject.repo.MealRepoImpl
  */
 class FirstFragment : Fragment() {
 
-private var _binding: FragmentFirstBinding? = null
+    private var _binding: FragmentFirstBinding? = null
     private val mealRepo = MealRepoImpl(APIClient) // Provide the concrete implementation
     private val viewModel: RetrofitViewModel by viewModels {
         ViewModelFactory(mealRepo)
@@ -46,9 +46,9 @@ private var _binding: FragmentFirstBinding? = null
         savedInstanceState: Bundle?
     ): View {
 
-      _binding = FragmentFirstBinding.inflate(inflater, container, false)
+        _binding = FragmentFirstBinding.inflate(inflater, container, false)
 
-      return binding.root
+        return binding.root
 
     }
 
@@ -71,15 +71,14 @@ private var _binding: FragmentFirstBinding? = null
         val itemSpacing = 50
         recyclerView2.addItemDecoration(ItemSpacingDecoration(itemSpacing))
         viewModel.mealCollection.observe(viewLifecycleOwner){meals->
-                val mealAdapter=MealAdapterCollection(meals,requireView(),requireContext(),userDao)
-                recyclerView2.adapter=mealAdapter
+            val mealAdapter=MealAdapterCollection(meals,requireView(),requireContext(),userDao)
+            recyclerView2.adapter=mealAdapter
         }
         viewModel.fetchRandomCollection()
 
 
     }
-
-override fun onDestroyView() {
+    override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
