@@ -31,7 +31,7 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val mealsList  = view.findViewById<RecyclerView>(R.id.meals_list)
-        val searchView = view.findViewById<SearchView>(R.id.imageView)
+        val searchView = view.findViewById<SearchView>(R.id.searchField)
         val viewModelFactory = ViewModelFactory(mealRepo = MealRepoImpl(APIClient))
         val viewModel = ViewModelProvider(this,viewModelFactory).get(RetrofitViewModel::class.java)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {

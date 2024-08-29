@@ -7,7 +7,7 @@
     tools:context=".ui.DetailsFragment" >
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/searchField"
         android:layout_width="425dp"
         android:layout_height="181dp"
         app:layout_constraintEnd_toEndOf="parent"
