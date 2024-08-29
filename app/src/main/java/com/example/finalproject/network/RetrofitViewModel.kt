@@ -24,9 +24,9 @@ class RetrofitViewModel(private val mealRepo: MealRepo):ViewModel() {
     val mealsListBySearch : LiveData<List<Meal>> = _mealsListBySearch
     fun fetchRandom(){
         try {
-        viewModelScope.launch(Dispatchers.IO) {
-            _meal.postValue(mealRepo.getRandom().meals[0])
-        }
+            viewModelScope.launch(Dispatchers.IO) {
+                _meal.postValue(mealRepo.getRandom().meals[0])
+            }
         }
         catch (exception: SocketTimeoutException){
             Log.d("fetchError","ConnectionTimeOut")

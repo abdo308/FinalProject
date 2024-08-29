@@ -19,8 +19,10 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.example.finalproject.R
 import com.example.finalproject.databinding.ActivityHomeBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.card.MaterialCardView
 
 class HomeActivity : AppCompatActivity() {
@@ -35,10 +37,26 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
-
         val navController = findNavController(R.id.nav_host_fragment_content_home)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
+        val bottomNavView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
+        bottomNavView.setupWithNavController(navController)
+        bottomNavView.setOnItemSelectedListener {
+            when(it.itemId){
+                R.id.action_search->{
+                    navController.navigate(R.id.action_FirstFragment_to_searchFragment)
+                    true
+                }
+                R.id.favourite->{
+                    true
+                }
+                R.id.home->{
+                    true
+                }
+                else ->false
+            }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
