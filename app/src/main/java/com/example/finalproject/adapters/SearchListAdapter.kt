@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
 import com.example.finalproject.network.Meal
+import com.example.finalproject.ui.SearchFragmentDirections
 
 class SearchListAdapter(private val meals:List<Meal>, private val context: View): RecyclerView.Adapter<SearchListAdapter.SearchItemViewHolder>() {
     private val likeMap:MutableMap<String?,Boolean> = mutableMapOf()
@@ -37,7 +38,8 @@ class SearchListAdapter(private val meals:List<Meal>, private val context: View)
             .into(holder.mealImage)
         holder.title.text=meal.strMeal
         holder.mealImage.setOnClickListener {
-            Navigation.findNavController(context).navigate(R.id.action_searchFragment_to_detailsFragment)
+            val direction = SearchFragmentDirections.actionSearchFragmentToDetailsFragment(meals[holder.adapterPosition])
+            Navigation.findNavController(context).navigate(direction)
         }
 
 
