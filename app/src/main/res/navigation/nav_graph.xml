@@ -63,6 +63,9 @@
         <action
             android:id="@+id/action_searchFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_aboutUsFragment"
+            app:destination="@id/aboutUsFragment" />
     </fragment>
 
 </navigation>
