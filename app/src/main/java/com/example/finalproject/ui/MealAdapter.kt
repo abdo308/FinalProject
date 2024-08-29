@@ -1,6 +1,4 @@
 import android.content.Context
-import android.service.autofill.UserData
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
 import com.example.finalproject.db.UsersDao
-import com.example.finalproject.models.UserFavourites
 import com.example.finalproject.network.Meal
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -21,7 +18,7 @@ import kotlinx.coroutines.withContext
 
 class MealAdapter(private val meals: Meal,private val context: View,private val context2: Context,private val userdao:UsersDao) : RecyclerView.Adapter<MealAdapter.MealViewHolder>() {
     inner class MealViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var mealImage: ImageView = itemView.findViewById(R.id.imageView)
+        var mealImage: ImageView = itemView.findViewById(R.id.searchField)
         var title=itemView.findViewById<TextView>(R.id.cardText)
         var heartIcon=itemView.findViewById<ImageButton>(R.id.imageButton)
     }
@@ -44,7 +41,7 @@ class MealAdapter(private val meals: Meal,private val context: View,private val 
         holder.title.text=meal.strMeal
         //===========================================
         // see if in the list make the love if not don't make it
-        CoroutineScope(Dispatchers.IO).launch {
+        CoroutineScope(Dispatchers.IO).launch{
             val userData=userdao.getDataUser(email)
             val list_favourite= userData.favouriteMeals
             val x=list_favourite.find { it.idMeal==meal.idMeal }
