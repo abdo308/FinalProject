@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -77,8 +78,10 @@ class MealAdapterCollection(private val meals:List<Meal>, private val context:Vi
             }
         }
         holder.mealImage.setOnClickListener {
-            Navigation.findNavController(context).navigate(R.id.action_from_home_to_details)
+            val direction = FirstFragmentDirections.actionFromHomeToDetails(meals[holder.adapterPosition])
+            Navigation.findNavController(context).navigate(direction)
         }
+
     }
 
     override fun getItemCount(): Int =  meals.size

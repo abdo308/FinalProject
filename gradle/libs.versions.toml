@@ -25,6 +25,8 @@ gson="2.11.0"
 retrofit="2.11.0"
 gsonConverter="2.11.0"
 lottie="6.5.0"
+parcelize="1.8.10"
+safeArgs="2.7.7"
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -56,6 +58,8 @@ lottie={group="com.airbnb.android",name="lottie",version.ref="lottie"}
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kapt" }
+kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize",  version.ref = "parcelize" }
+navigation-safe-args-gradle-plugin = {id = "androidx.navigation.safeargs.kotlin", version.ref = "safeArgs"}
 
 
 #com.github.bumptech.glide:glide:4.16.0

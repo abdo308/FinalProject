@@ -47,7 +47,11 @@
         android:id="@+id/detailsFragment"
         android:name="com.example.finalproject.ui.DetailsFragment"
         android:label="fragment_details"
-        tools:layout="@layout/fragment_details"/>
+        tools:layout="@layout/fragment_details">
+        <argument
+            android:name="meal"
+            app:argType="com.example.finalproject.network.Meal" />
+    </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.finalproject.ui.SearchFragment"
