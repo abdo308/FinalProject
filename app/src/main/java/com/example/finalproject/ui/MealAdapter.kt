@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.example.finalproject.R
 import com.example.finalproject.db.UsersDao
 import com.example.finalproject.network.Meal
+import com.example.finalproject.ui.FirstFragment
 import com.example.finalproject.ui.FirstFragmentDirections
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
