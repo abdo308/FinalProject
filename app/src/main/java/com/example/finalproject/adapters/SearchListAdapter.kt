@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
@@ -79,6 +80,7 @@ class SearchListAdapter(
                     liked = true
                     holder.heartIcon.setImageResource(R.drawable.baseline_favorite_24)
                     favourites.add(meal)
+                    Toast.makeText(context,"Added to favourites",Toast.LENGTH_SHORT).show()
                 }
                 if (email != null)
                     favViewModel.updateFavList(email,favourites)
