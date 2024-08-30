@@ -21,7 +21,6 @@ import kotlinx.coroutines.withContext
 
 // Still Trying to do it
 class MealAdapterCollection(private val meals:List<Meal>, private val context:View, private val context2: Context,private val userdao:UsersDao): RecyclerView.Adapter<MealAdapterCollection.MealViewHolder>() {
-    private val likeMap:MutableMap<String?,Boolean> = mutableMapOf()
     inner class MealViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var mealImage: ImageView = itemView.findViewById(R.id.searchField)
         var title=itemView.findViewById<TextView>(R.id.cardText)
