@@ -64,4 +64,11 @@
     <string name="heart_button" />
     <string name="imagefromapi" />
     <string name="some_text_from_api" />
+    <string name="sign_out_message">Sign Out</string>
+    <string name="are_you_sure_you_want_to_sign_out">Are you sure you want to sign out?</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="search">Search</string>
+    <string name="show_more">show more\n</string>
+    <string name="show_less">show less</string>
 </resources>
