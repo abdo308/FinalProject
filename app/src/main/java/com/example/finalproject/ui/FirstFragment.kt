@@ -9,11 +9,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -26,6 +37,7 @@ import com.example.finalproject.network.RemoteDataSource
 import com.example.finalproject.network.RetrofitViewModel
 import com.example.finalproject.network.ViewModelFactory
 import com.example.finalproject.repo.MealRepoImpl
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -33,7 +45,8 @@ import com.example.finalproject.repo.MealRepoImpl
 class FirstFragment : Fragment() {
 
     private var _binding: FragmentFirstBinding? = null
-    private val mealRepo = MealRepoImpl(APIClient) // Provide the concrete implementation
+    private lateinit var navController:NavController
+    private val mealRepo = MealRepoImpl(APIClient)
     private val viewModel: RetrofitViewModel by viewModels {
         ViewModelFactory(mealRepo)
     }
@@ -53,12 +66,14 @@ class FirstFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        Log.d("msg","Created")
         super.onViewCreated(view, savedInstanceState)
+        navController = Navigation.findNavController(view)
+
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
         val database = ApplicationDataBase.getInstance(requireContext())
         val userDao = database.userDao()
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-
         viewModel.meal.observe(viewLifecycleOwner) { meals ->
             val mealAdapter = MealAdapter(meals,requireView(), requireContext(),userDao)
             recyclerView.adapter = mealAdapter
@@ -76,12 +91,15 @@ class FirstFragment : Fragment() {
         }
         viewModel.fetchRandomCollection()
 
-
     }
+
     override fun onDestroyView() {
+        Log.d("msg","destroy")
+
         super.onDestroyView()
         _binding = null
     }
+
     class ItemSpacingDecoration(private val space: Int) : RecyclerView.ItemDecoration() {
         override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
             super.getItemOffsets(outRect, view, parent, state)
