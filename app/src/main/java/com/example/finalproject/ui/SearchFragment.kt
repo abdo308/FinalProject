@@ -43,7 +43,6 @@ class SearchFragment : Fragment() {
         val favViewModelFactory = FavouritesViewModelFactory(favouritesRepo = FavouritesRepoImpl(LocalDataSourceImpl(requireContext())))
         val favViewModel = ViewModelProvider(this,favViewModelFactory).get(FavouritesViewModel::class.java)
         val viewModel = ViewModelProvider(this,viewModelFactory).get(RetrofitViewModel::class.java)
-
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
