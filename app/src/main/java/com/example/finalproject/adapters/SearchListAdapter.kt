@@ -72,16 +72,15 @@ class SearchListAdapter(
             }
             holder.heartIcon.setOnClickListener {
                 if (liked) {
-                    liked = false
                     holder.heartIcon.setImageResource(R.drawable.baseline_favorite_border_24)
                     favourites.remove(meal)
                 }
                 else {
-                    liked = true
                     holder.heartIcon.setImageResource(R.drawable.baseline_favorite_24)
                     favourites.add(meal)
                     Toast.makeText(context,"Added to favourites",Toast.LENGTH_SHORT).show()
                 }
+                liked = !liked
                 if (email != null)
                     favViewModel.updateFavList(email,favourites)
             }
