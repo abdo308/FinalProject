@@ -73,4 +73,5 @@
     <string name="show_less">show less</string>
     <string name="favorites">Favorites</string>
     <string name="remove_from_favorites">remove from favorites</string>
+    <string name="welcome">Welcome</string>
 </resources>
