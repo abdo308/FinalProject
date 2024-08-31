@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.navigation.Navigation
 import com.airbnb.lottie.LottieAnimationView
 import com.example.finalproject.R
@@ -62,6 +63,14 @@ class SplashFragment : Fragment() {
                     startActivity(intent)
                 }
                 Navigation.findNavController(view).navigate(R.id.from_splash_to_login)
+            }
+
+            override fun onAnimationStart(animation: Animator) {
+                super.onAnimationStart(animation)
+                val text=view.findViewById<TextView>(R.id.textView6)
+                val text2=view.findViewById<TextView>(R.id.textView7)
+                text.visibility=View.VISIBLE
+                text2.visibility=View.VISIBLE
             }
         })
     }
