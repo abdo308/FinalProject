@@ -83,4 +83,7 @@ dependencies {
     implementation (libs.gsonConverter)
     implementation(libs.glide)
 
+    implementation(libs.circleimageview)
+
+
 }

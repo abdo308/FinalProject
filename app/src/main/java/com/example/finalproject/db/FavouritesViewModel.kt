@@ -12,25 +12,27 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class FavouritesViewModel(
-    private val repo : FavouritesRepo
+    private val repo: FavouritesRepo
 ) : ViewModel() {
 
- private val _favouritesList = MutableLiveData<MutableList<Meal>>()
+    private val _favouritesList = MutableLiveData<MutableList<Meal>>()
     val favourites = _favouritesList
 
-    fun getFavList(email : String){
+    fun getFavList(email: String) {
         viewModelScope.launch(Dispatchers.IO) {
             _favouritesList.postValue(repo.getFavouritesList(email).favouriteMeals)
         }
     }
-    fun addUser(userFavourites: UserFavourites){
+
+    fun addUser(userFavourites: UserFavourites) {
         viewModelScope.launch(Dispatchers.IO) {
             repo.insertUser(userFavourites)
         }
     }
-    fun updateFavList(email : String, favs : MutableList<Meal>){
+
+    fun updateFavList(email: String, favs: MutableList<Meal>) {
         viewModelScope.launch(Dispatchers.IO) {
-            repo.updateFavouritesList(email,favs)
+            repo.updateFavouritesList(email, favs)
         }
     }
 }
