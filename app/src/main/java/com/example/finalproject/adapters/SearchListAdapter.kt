@@ -1,19 +1,33 @@
 package com.example.finalproject.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
+import com.example.finalproject.db.FavouritesViewModel
+import com.example.finalproject.db.FavouritesViewModelFactory
+import com.example.finalproject.db.LocalDataSourceImpl
+import com.example.finalproject.models.UserFavourites
 import com.example.finalproject.network.Meal
 import com.example.finalproject.ui.SearchFragmentDirections
+import java.security.acl.Owner
 
-class SearchListAdapter(private val meals:List<Meal>, private val context: View): RecyclerView.Adapter<SearchListAdapter.SearchItemViewHolder>() {
+class SearchListAdapter(
+    private val meals:List<Meal>,
+    private val view: View,
+    private val context: Context,
+    private val favViewModel : FavouritesViewModel,
+    private val owner : LifecycleOwner
+    ): RecyclerView.Adapter<SearchListAdapter.SearchItemViewHolder>() {
     private val likeMap:MutableMap<String?,Boolean> = mutableMapOf()
     inner class SearchItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var mealImage: ImageView = itemView.findViewById(R.id.searchView)
@@ -29,8 +43,13 @@ class SearchListAdapter(private val meals:List<Meal>, private val context: View)
     override fun onBindViewHolder(holder: SearchItemViewHolder, position: Int) {
         val meal = meals[position]
         val id=meal.idMeal
-        val isLiked=likeMap[id] ?:false
-
+        var liked :Boolean
+        val sharedPreferences = view.context.getSharedPreferences("key", Context.MODE_PRIVATE)
+        val email=sharedPreferences.getString("Email","NoEmail")
+        if(email != null) {
+            favViewModel.addUser(UserFavourites(email, emptyList<Meal>().toMutableList()))
+            favViewModel.getFavList(email)
+        }
         Glide.with(holder.itemView.context)
             .load(meal.strMealThumb)
             .placeholder(R.drawable.baseline_downloading_24)
@@ -39,21 +58,36 @@ class SearchListAdapter(private val meals:List<Meal>, private val context: View)
         holder.title.text=meal.strMeal
         holder.mealImage.setOnClickListener {
             val direction = SearchFragmentDirections.actionSearchFragmentToDetailsFragment(meals[holder.adapterPosition])
-            Navigation.findNavController(context).navigate(direction)
+            Navigation.findNavController(view).navigate(direction)
+        }
+        favViewModel.favourites.observe(owner) { favs ->
+            val favourites = favs
+            val isLiked = favourites.find { id == it.idMeal }
+            if (isLiked == null) {
+                holder.heartIcon.setImageResource(R.drawable.baseline_favorite_border_24)
+                liked = false
+            } else {
+                holder.heartIcon.setImageResource(R.drawable.baseline_favorite_24)
+                liked = true
+            }
+            holder.heartIcon.setOnClickListener {
+                if (liked) {
+                    liked = false
+                    holder.heartIcon.setImageResource(R.drawable.baseline_favorite_border_24)
+                    favourites.remove(meal)
+                }
+                else {
+                    liked = true
+                    holder.heartIcon.setImageResource(R.drawable.baseline_favorite_24)
+                    favourites.add(meal)
+                    Toast.makeText(context,"Added to favourites",Toast.LENGTH_SHORT).show()
+                }
+                if (email != null)
+                    favViewModel.updateFavList(email,favourites)
+            }
+
         }
 
-
-        holder.heartIcon.setImageResource(
-            if (isLiked) R.drawable.heart_dark else R.drawable.heart
-        )
-        holder.heartIcon.setOnClickListener {
-            val currentLike = likeMap[id] ?: false
-            val newLike = !currentLike
-            likeMap[id] = newLike
-            holder.heartIcon.setImageResource(
-                if (newLike) R.drawable.heart else R.drawable.heart_dark
-            )
-        }
     }
 
     override fun getItemCount(): Int =  meals.size

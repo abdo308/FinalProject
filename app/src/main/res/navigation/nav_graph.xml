@@ -66,6 +66,9 @@
         <action
             android:id="@+id/action_searchFragment_to_aboutUsFragment"
             app:destination="@id/aboutUsFragment" />
+        <action
+            android:id="@+id/action_search_to_firstFragment"
+            app:destination="@id/FirstFragment"/>
     </fragment>
 
 </navigation>
