@@ -12,8 +12,8 @@
         tools:layout="@layout/fragment_first" >
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_FirstFragment_to_FavoriteFragment"
+            app:destination="@id/favoriteFragment" />
         <action
             android:id="@+id/action_FirstFragment_to_aboutUsFragment"
             app:destination="@id/aboutUsFragment" />
@@ -25,19 +25,28 @@
             android:id="@+id/action_FirstFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
     </fragment>
+
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.example.finalproject.ui.SecondFragment"
+        android:id="@+id/favoriteFragment"
+        android:name="com.example.finalproject.ui.favorite.FavoriteFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second" >
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            android:id="@+id/action_FavoriteFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
         <action
-            android:id="@+id/action_SecondFragment_to_aboutUsFragment"
+            android:id="@+id/action_FavoriteFragment_to_SearchFragment"
+            app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_FavoriteFragment_to_aboutUsFragment"
             app:destination="@id/aboutUsFragment" />
+
+        <action
+            android:id="@+id/action_favoriteFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/aboutUsFragment"
         android:name="com.example.finalproject.ui.AboutUsFragment"
@@ -69,6 +78,9 @@
         <action
             android:id="@+id/action_search_to_firstFragment"
             app:destination="@id/FirstFragment"/>
+        <action
+            android:id="@+id/action_search_to_favoriteFragment"
+            app:destination="@id/favoriteFragment"/>
     </fragment>
 
 </navigation>
