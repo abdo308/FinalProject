@@ -60,7 +60,7 @@ class FavoriteFragment : Fragment() {
 
         //Trigger getting the latest favorites list for the current user
 
-        viewModel.getFavList(email?: "")
+        viewModel.getFavList(email)
     }
 
     private fun subscribeToObservers()
