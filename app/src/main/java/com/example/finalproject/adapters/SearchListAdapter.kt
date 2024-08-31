@@ -1,25 +1,26 @@
 package com.example.finalproject.adapters
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
 import com.example.finalproject.db.FavouritesViewModel
-import com.example.finalproject.db.FavouritesViewModelFactory
-import com.example.finalproject.db.LocalDataSourceImpl
 import com.example.finalproject.models.UserFavourites
 import com.example.finalproject.network.Meal
 import com.example.finalproject.ui.SearchFragmentDirections
-import java.security.acl.Owner
 
 class SearchListAdapter(
     private val meals:List<Meal>,
@@ -45,10 +46,8 @@ class SearchListAdapter(
         var liked :Boolean
         val sharedPreferences = view.context.getSharedPreferences("key", Context.MODE_PRIVATE)
         val email=sharedPreferences.getString("Email","NoEmail")
-        if(email != null) {
-            favViewModel.addUser(UserFavourites(email, emptyList<Meal>().toMutableList()))
-            favViewModel.getFavList(email)
-        }
+            favViewModel.addUser(UserFavourites(email ?: "", emptyList<Meal>().toMutableList()))
+            favViewModel.getFavList(email ?: "")
         Glide.with(holder.itemView.context)
             .load(meal.strMealThumb)
             .placeholder(R.drawable.baseline_downloading_24)
@@ -60,8 +59,7 @@ class SearchListAdapter(
             Navigation.findNavController(view).navigate(direction)
         }
         favViewModel.favourites.observe(owner) { favs ->
-            val favourites = favs
-            val isLiked = favourites.find { id == it.idMeal }
+            val isLiked = favs.find { id == it.idMeal }
             if (isLiked == null) {
                 holder.heartIcon.setImageResource(R.drawable.baseline_favorite_border_24)
                 liked = false
@@ -71,17 +69,15 @@ class SearchListAdapter(
             }
             holder.heartIcon.setOnClickListener {
                 if (liked) {
-                    holder.heartIcon.setImageResource(R.drawable.baseline_favorite_border_24)
-                    favourites.remove(meal)
-                }
-                else {
+                 liked = showFavConfirmationMessage(holder,favs,meal,email ?: "")
+                } else {
                     holder.heartIcon.setImageResource(R.drawable.baseline_favorite_24)
-                    favourites.add(meal)
-                    Toast.makeText(context,"Added to favourites",Toast.LENGTH_SHORT).show()
+                    favs.add(meal)
+                    Toast.makeText(context, "Added to favourites", Toast.LENGTH_SHORT).show()
+                    liked = true
+                    favViewModel.updateFavList(email ?: "", favs)
                 }
-                liked = !liked
-                if (email != null)
-                    favViewModel.updateFavList(email,favourites)
+
             }
 
         }
@@ -89,4 +85,37 @@ class SearchListAdapter(
     }
 
     override fun getItemCount(): Int =  meals.size
+
+    private fun showFavConfirmationMessage(
+        holder: SearchItemViewHolder,
+        favs : MutableList<Meal>,
+        meal: Meal,
+        email : String) : Boolean
+    {
+        val dialogView = LayoutInflater.from(context)
+            .inflate(R.layout.confirmation_message_view, null)
+        val builder = AlertDialog.Builder(context)
+        builder.setView(dialogView)
+        val dialog = builder.create()
+        val message = dialogView.findViewById<TextView>(R.id.messageText)
+        val title = dialogView.findViewById<TextView>(R.id.titleText)
+        val yesButton = dialogView.findViewById<Button>(R.id.button_yes)
+        val noButton = dialogView.findViewById<Button>(R.id.button_no)
+        var liked = true
+        message.text = "Are you sure you want to remove this item from favourites?"
+        title.text = "Remove from favourites"
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.show()
+        yesButton.setOnClickListener {
+            holder.heartIcon.setImageResource(R.drawable.baseline_favorite_border_24)
+            favs.remove(meal)
+            favViewModel.updateFavList(email, favs)
+            liked = false
+            dialog.hide()
+        }
+        noButton.setOnClickListener {
+            dialog.hide()
+        }
+        return liked
+    }
 }
