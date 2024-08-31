@@ -28,7 +28,6 @@ class SearchListAdapter(
     private val favViewModel : FavouritesViewModel,
     private val owner : LifecycleOwner
     ): RecyclerView.Adapter<SearchListAdapter.SearchItemViewHolder>() {
-    private val likeMap:MutableMap<String?,Boolean> = mutableMapOf()
     inner class SearchItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var mealImage: ImageView = itemView.findViewById(R.id.searchView)
         var title=itemView.findViewById<TextView>(R.id.searchCardText)
