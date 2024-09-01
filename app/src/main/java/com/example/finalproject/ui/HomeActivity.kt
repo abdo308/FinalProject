@@ -39,40 +39,19 @@ class HomeActivity : AppCompatActivity() {
 
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        Log.d("msg","HomeActvity")
         setSupportActionBar(binding.toolbar)
         val navController = findNavController(R.id.nav_host_fragment_content_home)
-
-        appBarConfiguration = AppBarConfiguration(setOf(R.id.FirstFragment,R.id.searchFragment,R.id.favoriteFragment))
-
-        setupActionBarWithNavController(navController, appBarConfiguration)
-
         val bottomNavView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
-
+        appBarConfiguration = AppBarConfiguration(setOf(R.id.FirstFragment,R.id.searchFragment,R.id.favoriteFragment))
+        setupActionBarWithNavController(navController,appBarConfiguration)
         bottomNavView.setupWithNavController(navController)
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(false)
-        bottomNavView.setOnItemSelectedListener {
-            when(it.itemId){
-                R.id.action_search->{
-                    navController.navigate(R.id.searchFragment)
-                    true
-                }
-                R.id.favourite->{
-                    navController.navigate(R.id.favoriteFragment)
-                    true
-                }
-                R.id.home->{
-                    navController.navigate(R.id.FirstFragment)
-                    true
-                }
-                else ->false
-            }
-        }
 
     }
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_home)
+        val bottomNavView:BottomNavigationView=findViewById(R.id.bottomNavigationView)
+        bottomNavView.visibility=View.VISIBLE
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
     }
@@ -95,7 +74,17 @@ class HomeActivity : AppCompatActivity() {
 
             R.id.action_about_us -> {
                 val navController = findNavController(R.id.nav_host_fragment_content_home)
-                navController.navigate(R.id.aboutUsFragment)
+                val bottomNavView:BottomNavigationView=findViewById(R.id.bottomNavigationView)
+                bottomNavView.visibility=View.GONE
+                if (navController.currentDestination?.id != R.id.aboutUsFragment)
+                    when (navController.currentDestination?.id) {
+                        R.id.FirstFragment -> navController.navigate(R.id.action_FirstFragment_to_aboutUsFragment)
+                        R.id.favoriteFragment -> navController.navigate(R.id.action_FavoriteFragment_to_aboutUsFragment)
+                        R.id.searchFragment -> navController.navigate(R.id.action_searchFragment_to_aboutUsFragment)
+                        R.id.detailsFragment -> navController.navigate(R.id.action_detailsFragment_to_aboutUsFragment)
+                    }
+
+
                 return true
             }
         }
