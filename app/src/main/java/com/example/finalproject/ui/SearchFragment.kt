@@ -10,6 +10,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import com.example.finalproject.R
 import com.example.finalproject.adapters.SearchListAdapter
 import com.example.finalproject.db.FavouritesViewModel
@@ -43,6 +44,8 @@ class SearchFragment : Fragment() {
         val favViewModelFactory = FavouritesViewModelFactory(favouritesRepo = FavouritesRepoImpl(LocalDataSourceImpl(requireContext())))
         val favViewModel = ViewModelProvider(this,favViewModelFactory).get(FavouritesViewModel::class.java)
         val viewModel = ViewModelProvider(this,viewModelFactory).get(RetrofitViewModel::class.java)
+        val lottie = view.findViewById<LottieAnimationView>(R.id.searchLottie)
+        lottie.setAnimation(R.raw.search)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
@@ -56,6 +59,13 @@ class SearchFragment : Fragment() {
                             SearchListAdapter(list, requireView(), requireContext(),
                                 favViewModel,viewLifecycleOwner
                             )
+                        if(myAdapter.itemCount == 0){
+                            lottie.visibility = View.VISIBLE
+                            lottie.playAnimation()
+                        }
+                        else{
+                            lottie.visibility = View.GONE
+                        }
                         mealsList.adapter = myAdapter
                     }
 
