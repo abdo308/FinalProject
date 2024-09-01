@@ -28,6 +28,7 @@
                 android:layout_marginTop="10dp"
                 android:text="@string/sign_out_message"
                 android:textSize="30sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -56,6 +57,7 @@
                     android:layout_weight="1"
                     android:text="@string/no"
                     android:textColor="#FFFFFF"
+                    app:cornerRadius="15dp"
                     app:layout_constraintBaseline_toBaselineOf="@+id/button_yes"
                     app:layout_constraintEnd_toStartOf="@+id/button_yes"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -68,10 +70,11 @@
                     android:layout_marginStart="100dp"
                     android:layout_marginTop="0dp"
                     android:layout_marginEnd="50dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="15dp"
                     android:layout_weight="1"
                     android:text="@string/yes"
                     android:textColor="#FFFFFF"
+                    app:cornerRadius="15dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/button_no"
