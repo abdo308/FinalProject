@@ -45,7 +45,6 @@ class SearchFragment : Fragment() {
         val favViewModel = ViewModelProvider(this,favViewModelFactory).get(FavouritesViewModel::class.java)
         val viewModel = ViewModelProvider(this,viewModelFactory).get(RetrofitViewModel::class.java)
         val lottie = view.findViewById<LottieAnimationView>(R.id.searchLottie)
-        lottie.setAnimation(R.raw.search)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false

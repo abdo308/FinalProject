@@ -50,7 +50,7 @@
     <fragment
         android:id="@+id/aboutUsFragment"
         android:name="com.example.finalproject.ui.AboutUsFragment"
-        android:label="fragment_about_us"
+        android:label="@string/about_us_label"
         tools:layout="@layout/fragment_about_us" />
     <fragment
         android:id="@+id/detailsFragment"
@@ -67,8 +67,8 @@
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.finalproject.ui.SearchFragment"
-        android:label="fragment_search"
-        tools:layout="@layout/fragment_search" >
+        android:label="@string/search_label"
+        tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/action_searchFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
@@ -77,10 +77,10 @@
             app:destination="@id/aboutUsFragment" />
         <action
             android:id="@+id/action_search_to_firstFragment"
-            app:destination="@id/FirstFragment"/>
+            app:destination="@id/FirstFragment" />
         <action
             android:id="@+id/action_search_to_favoriteFragment"
-            app:destination="@id/favoriteFragment"/>
+            app:destination="@id/favoriteFragment" />
     </fragment>
 
 </navigation>

@@ -95,17 +95,7 @@ class HomeActivity : AppCompatActivity() {
 
             R.id.action_about_us -> {
                 val navController = findNavController(R.id.nav_host_fragment_content_home)
-                if (navController.currentDestination?.id != R.id.aboutUsFragment)
-                    if (navController.currentDestination?.id == R.id.FirstFragment)
-                        navController.navigate(R.id.action_FirstFragment_to_aboutUsFragment)
-                    else if (navController.currentDestination?.id == R.id.favoritesFragment)
-                        navController.navigate(R.id.action_FavoriteFragment_to_aboutUsFragment)
-                    else if (navController.currentDestination?.id == R.id.searchFragment)
-                        navController.navigate(R.id.action_searchFragment_to_aboutUsFragment)
-                    else if (navController.currentDestination?.id == R.id.detailsFragment)
-                        navController.navigate(R.id.action_detailsFragment_to_aboutUsFragment)
-
-
+                navController.navigate(R.id.aboutUsFragment)
                 return true
             }
         }

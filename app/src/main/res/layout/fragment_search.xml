@@ -27,6 +27,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/search"
+        android:textColor="#000000"
         android:textSize="48sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,7 +41,8 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchField" />
+        app:layout_constraintTop_toBottomOf="@+id/searchField"
+        app:lottie_rawRes="@raw/search"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/meals_list"
