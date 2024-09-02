@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -70,10 +71,13 @@ class MealAdapter(private val meals: Meal,private val context: View,private val 
                     if(x==null){
                         list_favourite.add(meal)
                         holder.heartIcon.setImageResource(R.drawable.baseline_favorite_24)
+                        Toast.makeText(context2,"Added in Favourites",Toast.LENGTH_SHORT).show()
                     }
                     else{
                         list_favourite.remove(meal)
                         holder.heartIcon.setImageResource(R.drawable.baseline_favorite_border_24)
+                        Toast.makeText(context2,"Removed From Favourites",Toast.LENGTH_SHORT).show()
+
                     }
                 }
                 userdao.updateData(userData.email,list_favourite)
