@@ -75,6 +75,9 @@
     <string name="search_label">Search</string>
     <string name="about_us_label">About</string>
     <string name="remove_from_favorites">remove from favorites</string>
+    <string name="about_us_label">About Us</string>
+    <string name="remove_from_favorites">Remove from favorites</string>
+    <string name="remove_from_favorites_confirmation_message">Remove from favorites</string>
     <string name="welcome">Welcome</string>
     <string name="about_the_app">About the App</string>
     <string name="description">Hungry for inspiration? We’re your culinary companions! Our app celebrates the joy of cooking, from secret family recipes to global flavors. Join us in the kitchen where every dish tells a delicious story!</string>
