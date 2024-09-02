@@ -76,4 +76,15 @@
     <string name="about_us_label">About</string>
     <string name="remove_from_favorites">remove from favorites</string>
     <string name="welcome">Welcome</string>
+    <string name="about_the_app">About the App</string>
+    <string name="description">Hungry for inspiration? We’re your culinary companions! Our app celebrates the joy of cooking, from secret family recipes to global flavors. Join us in the kitchen where every dish tells a delicious story!</string>
+    <string name="about_us_title">About Us</string>
+    <string name="first_member">Abdelrahman Mansour Mohamed</string>
+    <string name="first_member_email">TextView</string>
+    <string name="second_member">Abdelrahman Magdy Eid</string>
+    <string name="second_member_email">Email: magdybody78@gmail.com</string>
+    <string name="third_member">Hossam Eid Ibrahim</string>
+    <string name="third_member_email">Email: eidhossam7@gmail.com</string>
+    <string name="fourth_member">Youssef Sabry Ramzy</string>
+    <string name="fourth_member_email">Email: youssef.sabry1200@gmail.com</string>
 </resources>
