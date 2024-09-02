@@ -60,7 +60,7 @@
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
     <string name="sign_out">Sign Out</string>
-    <string name="about_us">About Us</string>
+    <string name="about_us">About</string>
     <string name="heart_button" />
     <string name="imagefromapi" />
     <string name="some_text_from_api" />
@@ -73,7 +73,7 @@
     <string name="show_less">show less</string>
     <string name="favorites">Favorites</string>
     <string name="search_label">Search</string>
-    <string name="about_us_label">About Us</string>
+    <string name="about_us_label">About</string>
     <string name="remove_from_favorites">remove from favorites</string>
     <string name="welcome">Welcome</string>
 </resources>
