@@ -102,8 +102,8 @@ class SearchListAdapter(
         val yesButton = dialogView.findViewById<Button>(R.id.button_yes)
         val noButton = dialogView.findViewById<Button>(R.id.button_no)
         var liked = true
-        message.text = "Are you sure you want to remove this item from favourites?"
-        title.text = "Remove from favourites"
+        message.text = context.getString(R.string.remove_from_favorites_confirmation_message)
+        title.text = context.getString(R.string.remove_from_favorites)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
         yesButton.setOnClickListener {
