@@ -38,7 +38,7 @@
         android:layout_marginBottom="10dp"
         android:text="@string/about_the_app"
         android:textColor="#000000"
-        android:textSize="30sp"
+        android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textView8"
         app:layout_constraintStart_toStartOf="@+id/guideline4" />
@@ -50,7 +50,7 @@
         android:layout_marginBottom="20dp"
         android:text="@string/description"
         android:textColor="#000000"
-        android:textSize="20sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/textView9"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintStart_toStartOf="@+id/guideline4" />
@@ -62,7 +62,7 @@
         android:layout_marginBottom="10dp"
         android:text="@string/about_us_title"
         android:textColor="#000000"
-        android:textSize="30sp"
+        android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textView10"
         app:layout_constraintStart_toStartOf="@+id/guideline4" />
@@ -86,7 +86,7 @@
         android:layout_marginBottom="10dp"
         android:text="@string/first_member_email"
         android:textColor="#6F6F6F"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/textView12"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintStart_toStartOf="@+id/guideline4" />
@@ -110,7 +110,7 @@
         android:layout_marginBottom="10dp"
         android:text="@string/second_member_email"
         android:textColor="#6F6F6F"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/textView14"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintStart_toStartOf="@+id/guideline4" />
@@ -134,7 +134,7 @@
         android:layout_marginBottom="10dp"
         android:text="@string/third_member_email"
         android:textColor="#6F6F6F"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/textView16"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintStart_toStartOf="@+id/guideline4" />
@@ -157,16 +157,9 @@
         android:layout_height="wrap_content"
         android:text="@string/fourth_member_email"
         android:textColor="#6F6F6F"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline6"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintStart_toStartOf="@+id/guideline4" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_end="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
