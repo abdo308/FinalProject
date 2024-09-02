@@ -1,12 +1,20 @@
 package com.example.finalproject.ui.favorite
 
+import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.finalproject.R
 import com.example.finalproject.databinding.CardviewFavoriteBinding
 import com.example.finalproject.network.Meal
 
@@ -40,12 +48,36 @@ class FavoriteAdapter(
             itemBinding.mealAreaTextView.text = meal.strArea
 
             itemBinding.favoriteButton.setOnClickListener {
-                deleteItem(adapterPosition)
+                showFavConfirmationMessage(itemView.context)
             }
 
-            itemBinding.favoritesItemCardView.setOnClickListener{
-                val directions = FavoriteFragmentDirections.actionFavoriteFragmentToDetailsFragment(meal)
+            itemBinding.favoritesItemCardView.setOnClickListener {
+                val directions =
+                    FavoriteFragmentDirections.actionFavoriteFragmentToDetailsFragment(meal)
                 it.findNavController().navigate(directions)
+            }
+        }
+
+        private fun showFavConfirmationMessage(context: Context) {
+            val dialogView = LayoutInflater.from(context)
+                .inflate(R.layout.confirmation_message_view, null)
+            val builder = AlertDialog.Builder(context)
+            builder.setView(dialogView)
+            val dialog = builder.create()
+            val message = dialogView.findViewById<TextView>(R.id.messageText)
+            val title = dialogView.findViewById<TextView>(R.id.titleText)
+            val yesButton = dialogView.findViewById<Button>(R.id.button_yes)
+            val noButton = dialogView.findViewById<Button>(R.id.button_no)
+            message.text = ContextCompat.getString(context, R.string.remove_from_favorites_confirmation_message)
+            title.text = ContextCompat.getString(context, R.string.remove_from_favorites)
+            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.show()
+            yesButton.setOnClickListener {
+                deleteItem(adapterPosition)
+                dialog.hide()
+            }
+            noButton.setOnClickListener {
+                dialog.hide()
             }
         }
     }
