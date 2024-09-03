@@ -33,7 +33,7 @@ class FavouritesViewModel(
     fun updateFavList(email: String, favs: MutableList<Meal>) {
         viewModelScope.launch(Dispatchers.IO) {
             _favouritesList.postValue(favs)
-            repo.updateFavouritesList(email, _favouritesList.value ?: emptyList<Meal>().toMutableList())
+            repo.updateFavouritesList(email, favs)
         }
     }
 }
