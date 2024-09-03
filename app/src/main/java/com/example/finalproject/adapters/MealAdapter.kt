@@ -21,7 +21,6 @@ import com.example.finalproject.R
 import com.example.finalproject.db.UsersDao
 import com.example.finalproject.network.Meal
 import com.example.finalproject.ui.FirstFragmentDirections
-import com.example.finalproject.ui.HomeViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
