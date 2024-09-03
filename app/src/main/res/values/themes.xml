@@ -19,7 +19,7 @@
         <item name="android:textColorSecondary">@color/textColorSecondary</item>
 
         <item name="colorError">@android:color/holo_red_light</item>
-
+        <item name="fontFamily">@font/merienda</item>
     </style>
 
     <style name="Theme.MyRecipeApp" parent="Base.Theme.MyRecipeApp" />
