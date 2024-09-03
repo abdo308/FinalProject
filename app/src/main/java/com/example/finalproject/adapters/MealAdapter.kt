@@ -1,13 +1,19 @@
 package com.example.finalproject.adapters
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -15,6 +21,7 @@ import com.example.finalproject.R
 import com.example.finalproject.db.UsersDao
 import com.example.finalproject.network.Meal
 import com.example.finalproject.ui.FirstFragmentDirections
+import com.example.finalproject.ui.HomeViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -63,24 +70,39 @@ class MealAdapter(private val meals: Meal,private val context: View,private val 
         //===========================================
 
         holder.heartIcon.setOnClickListener {
-            CoroutineScope(Dispatchers.IO).launch {
-                val userData=userdao.getDataUser(email)
-                val list_favourite= userData.favouriteMeals
-                val x=list_favourite.find { it.idMeal==meal.idMeal }
-                withContext(Dispatchers.Main){
-                    if(x==null){
-                        list_favourite.add(meal)
-                        holder.heartIcon.setImageResource(R.drawable.baseline_favorite_24)
-                        Toast.makeText(context2,"Added in Favourites",Toast.LENGTH_SHORT).show()
-                    }
-                    else{
-                        list_favourite.remove(meal)
-                        holder.heartIcon.setImageResource(R.drawable.baseline_favorite_border_24)
-                        Toast.makeText(context2,"Removed From Favourites",Toast.LENGTH_SHORT).show()
+                CoroutineScope(Dispatchers.IO).launch {
+                    val userData = userdao.getDataUser(email)
+                    val list_favourite = userData.favouriteMeals
+                    val x = list_favourite.find { it.idMeal == meal.idMeal }
+                    withContext(Dispatchers.Main){
+                        if (x == null) {
+                            list_favourite.add(meal)
+                            holder.heartIcon.setImageResource(R.drawable.baseline_favorite_24)
+                            Toast.makeText(context2, "Added in Favourites", Toast.LENGTH_SHORT)
+                                .show()
+                            Log.d("msg","Update add")
+
+                            userdao.updateData(userData.email, list_favourite)
+
+                        } else {
+                            showFavConfirmationMessage(context2) {
+                                list_favourite.remove(meal)
+                                Log.d("msg", meal.strMeal.toString())
+                                holder.heartIcon.setImageResource(R.drawable.baseline_favorite_border_24)
+                                Toast.makeText(context2, "Removed From Favourites", Toast.LENGTH_SHORT)
+                                    .show()
+                                CoroutineScope(Dispatchers.IO).launch {
+                                    Log.d("msg","Update Remove")
+                                    userdao.updateData(userData.email, list_favourite)
+                                }
+
+                            }
+
 
                     }
+
                 }
-                userdao.updateData(userData.email,list_favourite)
+
             }
 
 
@@ -92,6 +114,27 @@ class MealAdapter(private val meals: Meal,private val context: View,private val 
             Navigation.findNavController(context).navigate(direction)
         }
     }
-
+    private fun showFavConfirmationMessage(context: Context, onConfirm: () -> Unit) {
+        val dialogView = LayoutInflater.from(context)
+            .inflate(R.layout.confirmation_message_view, null)
+        val builder = AlertDialog.Builder(context)
+        builder.setView(dialogView)
+        val dialog = builder.create()
+        val message = dialogView.findViewById<TextView>(R.id.messageText)
+        val title = dialogView.findViewById<TextView>(R.id.titleText)
+        val yesButton = dialogView.findViewById<Button>(R.id.button_yes)
+        val noButton = dialogView.findViewById<Button>(R.id.button_no)
+        message.text = ContextCompat.getString(context, R.string.remove_from_favorites_confirmation_message)
+        title.text = ContextCompat.getString(context, R.string.remove_from_favorites)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.show()
+        yesButton.setOnClickListener {
+            dialog.hide()
+            onConfirm()
+        }
+        noButton.setOnClickListener {
+            dialog.hide()
+        }
+    }
     override fun getItemCount(): Int =  1
 }
