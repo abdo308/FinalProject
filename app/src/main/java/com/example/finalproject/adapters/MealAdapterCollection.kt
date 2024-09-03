@@ -1,13 +1,19 @@
 package com.example.finalproject.adapters
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -68,14 +74,22 @@ class MealAdapterCollection(private val meals:List<Meal>, private val context:Vi
                         list_favourite.add(meal)
                         holder.heartIcon.setImageResource(R.drawable.baseline_favorite_24)
                         Toast.makeText(context2,"Added in Favourites",Toast.LENGTH_SHORT).show()
+                        userdao.updateData(userData.email, list_favourite)
+
                     }
                     else{
-                        list_favourite.remove(meal)
-                        holder.heartIcon.setImageResource(R.drawable.baseline_favorite_border_24)
-                        Toast.makeText(context2,"Removed From Favourites", Toast.LENGTH_SHORT).show()
+                        showFavConfirmationMessage(context2) {
+                            list_favourite.remove(meal)
+                            holder.heartIcon.setImageResource(R.drawable.baseline_favorite_border_24)
+                            Toast.makeText(context2, "Removed From Favourites", Toast.LENGTH_SHORT)
+                                .show()
+                            CoroutineScope(Dispatchers.IO).launch {
+                                userdao.updateData(userData.email, list_favourite)
+                            }
+
+                        }
                     }
                 }
-                userdao.updateData(userData.email,list_favourite)
             }
         }
         holder.mealImage.setOnClickListener {
@@ -84,6 +98,27 @@ class MealAdapterCollection(private val meals:List<Meal>, private val context:Vi
         }
 
     }
-
+    private fun showFavConfirmationMessage(context: Context, onConfirm: () -> Unit) {
+        val dialogView = LayoutInflater.from(context)
+            .inflate(R.layout.confirmation_message_view, null)
+        val builder = AlertDialog.Builder(context)
+        builder.setView(dialogView)
+        val dialog = builder.create()
+        val message = dialogView.findViewById<TextView>(R.id.messageText)
+        val title = dialogView.findViewById<TextView>(R.id.titleText)
+        val yesButton = dialogView.findViewById<Button>(R.id.button_yes)
+        val noButton = dialogView.findViewById<Button>(R.id.button_no)
+        message.text = ContextCompat.getString(context, R.string.remove_from_favorites_confirmation_message)
+        title.text = ContextCompat.getString(context, R.string.remove_from_favorites)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.show()
+        yesButton.setOnClickListener {
+            dialog.hide()
+            onConfirm()
+        }
+        noButton.setOnClickListener {
+            dialog.hide()
+        }
+    }
     override fun getItemCount(): Int =  meals.size
 }
