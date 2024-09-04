@@ -86,4 +86,6 @@ dependencies {
     implementation(libs.circleimageview)
     implementation(libs.androidyoutubeplayer)
 
+    // flag kit
+    implementation(libs.flag.kit)
 }
