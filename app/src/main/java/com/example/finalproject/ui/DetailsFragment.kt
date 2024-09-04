@@ -19,17 +19,17 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
-import com.example.finalproject.adapters.SearchListAdapter.SearchItemViewHolder
 import com.example.finalproject.db.FavouritesViewModel
 import com.example.finalproject.db.FavouritesViewModelFactory
 import com.example.finalproject.db.LocalDataSourceImpl
+import com.example.finalproject.models.CountryCodes
 import com.example.finalproject.network.Meal
 import com.example.finalproject.repo.FavouritesRepoImpl
+import com.murgupluoglu.flagkit.FlagKit
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import kotlinx.coroutines.launch
-
 
 class DetailsFragment : Fragment() {
 
@@ -85,6 +85,10 @@ class DetailsFragment : Fragment() {
                     youTubePlayer.loadVideo(videoId, 0f)
                 }
             })
+            view.findViewById<TextView>(R.id.country_name_text_view).text = meal.strArea
+            val flagView: ImageView = view.findViewById(R.id.flag_image_view)
+            val resourceId = FlagKit.getResId(requireContext(), CountryCodes.codes[meal.strArea] ?: "")
+            flagView.setImageResource(resourceId)
         }
         val sharedPreferences = view.context.getSharedPreferences("key", Context.MODE_PRIVATE)
         val email=sharedPreferences.getString("Email", "No email found") ?: ""
