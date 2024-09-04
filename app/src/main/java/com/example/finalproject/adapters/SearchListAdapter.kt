@@ -113,6 +113,7 @@ class SearchListAdapter(
             favs.remove(meal)
             favViewModel.updateFavList(email, favs)
             liked = false
+            Toast.makeText(context, "Removed from favourites", Toast.LENGTH_SHORT).show()
             dialog.hide()
         }
         noButton.setOnClickListener {
