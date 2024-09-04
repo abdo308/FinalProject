@@ -1,5 +1,6 @@
 package com.example.finalproject.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -40,14 +41,15 @@ class SearchListAdapter(
         return SearchItemViewHolder(view)
     }
 
+
     override fun onBindViewHolder(holder: SearchItemViewHolder, position: Int) {
         val meal = meals[position]
         val id=meal.idMeal
         var liked :Boolean
         val sharedPreferences = view.context.getSharedPreferences("key", Context.MODE_PRIVATE)
         val email=sharedPreferences.getString("Email","NoEmail")
-            favViewModel.addUser(UserFavourites(email ?: "", emptyList<Meal>().toMutableList()))
-            favViewModel.getFavList(email ?: "")
+        favViewModel.addUser(UserFavourites(email ?: "", emptyList<Meal>().toMutableList()))
+        favViewModel.getFavList(email ?: "")
         Glide.with(holder.itemView.context)
             .load(meal.strMealThumb)
             .placeholder(R.drawable.baseline_downloading_24)
@@ -111,6 +113,7 @@ class SearchListAdapter(
             favs.remove(meal)
             favViewModel.updateFavList(email, favs)
             liked = false
+            Toast.makeText(context, "Removed from favourites", Toast.LENGTH_SHORT).show()
             dialog.hide()
         }
         noButton.setOnClickListener {
