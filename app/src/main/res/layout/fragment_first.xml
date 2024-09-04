@@ -39,7 +39,8 @@
                 android:indeterminateDrawable="@drawable/progress_bar"
                 android:indeterminateDuration="@android:integer/config_longAnimTime"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
@@ -83,7 +84,8 @@
                     android:indeterminateDrawable="@drawable/progress_bar"
                     android:indeterminateDuration="@android:integer/config_longAnimTime"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView2"
