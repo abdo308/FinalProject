@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -52,13 +53,19 @@ class FirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
 
+        val progressBar=view.findViewById<ProgressBar>(R.id.progressBar)
+        val progressBar2=view.findViewById<ProgressBar>(R.id.progressBar2)
+
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
         val database = ApplicationDataBase.getInstance(requireContext())
         val userDao = database.userDao()
+
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         viewModel.meal.observe(viewLifecycleOwner) { meals ->
             val mealAdapter = MealAdapter(meals,requireView(), requireContext(),userDao)
             recyclerView.adapter = mealAdapter
+            progressBar.visibility=View.GONE
+            recyclerView.visibility=View.VISIBLE
         }
         viewModel.fetchRandom()
 
@@ -67,10 +74,14 @@ class FirstFragment : Fragment() {
 
         val itemSpacing = 50
         recyclerView2.addItemDecoration(ItemSpacingDecoration(itemSpacing))
+
         viewModel.mealCollection.observe(viewLifecycleOwner){meals->
             val mealAdapter= MealAdapterCollection(meals,requireView(),requireContext(),userDao)
             recyclerView2.adapter=mealAdapter
+            progressBar2.visibility=View.GONE
+            recyclerView2.visibility=View.VISIBLE
         }
+
         viewModel.fetchRandomCollection()
 
     }
