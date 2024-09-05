@@ -74,17 +74,9 @@ class HomeActivity : AppCompatActivity() {
 
             R.id.action_about_us -> {
                 val navController = findNavController(R.id.nav_host_fragment_content_home)
-                val bottomNavView:BottomNavigationView=findViewById(R.id.bottomNavigationView)
-                bottomNavView.visibility=View.GONE
-                if (navController.currentDestination?.id != R.id.aboutUsFragment)
-                    when (navController.currentDestination?.id) {
-                        R.id.FirstFragment -> navController.navigate(R.id.action_FirstFragment_to_aboutUsFragment)
-                        R.id.favoriteFragment -> navController.navigate(R.id.action_FavoriteFragment_to_aboutUsFragment)
-                        R.id.searchFragment -> navController.navigate(R.id.action_searchFragment_to_aboutUsFragment)
-                        R.id.detailsFragment -> navController.navigate(R.id.action_detailsFragment_to_aboutUsFragment)
-                    }
-
-
+                val bottomNavView : BottomNavigationView = findViewById(R.id.bottomNavigationView)
+                bottomNavView.visibility = View.GONE
+                navController.navigate(R.id.aboutUsFragment)
                 return true
             }
         }
