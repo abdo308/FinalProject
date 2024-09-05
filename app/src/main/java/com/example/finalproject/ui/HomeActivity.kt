@@ -47,10 +47,19 @@ class HomeActivity : AppCompatActivity() {
         bottomNavView.setupWithNavController(navController)
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                val x=findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-                x.visibility=View.VISIBLE
-                navController.navigateUp()
+                val currentDestinationId = navController.currentDestination?.id
+                if(currentDestinationId==R.id.FirstFragment){
+                    finish()
+                }
+                else
+                {
+                    val x=findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+                    x.visibility=View.VISIBLE
+                    navController.navigateUp()
+                }
+
             }
+
         })
 
     }
