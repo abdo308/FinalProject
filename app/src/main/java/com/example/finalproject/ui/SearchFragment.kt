@@ -1,6 +1,5 @@
 package com.example.finalproject.ui
 
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,9 +15,7 @@ import com.example.finalproject.adapters.SearchListAdapter
 import com.example.finalproject.db.FavouritesViewModel
 import com.example.finalproject.db.FavouritesViewModelFactory
 import com.example.finalproject.db.LocalDataSourceImpl
-import com.example.finalproject.models.UserFavourites
 import com.example.finalproject.network.APIClient
-import com.example.finalproject.network.Meal
 import com.example.finalproject.network.RetrofitViewModel
 import com.example.finalproject.network.ViewModelFactory
 import com.example.finalproject.repo.FavouritesRepoImpl
