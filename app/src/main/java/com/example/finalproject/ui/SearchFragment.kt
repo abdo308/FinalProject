@@ -67,6 +67,10 @@ class SearchFragment : Fragment() {
                         }
                         mealsList.adapter = myAdapter
                     }
+                if(newText.isNullOrEmpty())
+                    mealsList.visibility = View.GONE
+                else
+                    mealsList.visibility = View.VISIBLE
 
                 return true
             }
