@@ -76,6 +76,7 @@ class HomeActivity : AppCompatActivity() {
                 val navController = findNavController(R.id.nav_host_fragment_content_home)
                 val bottomNavView : BottomNavigationView = findViewById(R.id.bottomNavigationView)
                 bottomNavView.visibility = View.GONE
+                if(navController.currentDestination?.id != R.id.aboutUsFragment)
                 navController.navigate(R.id.aboutUsFragment)
                 return true
             }
