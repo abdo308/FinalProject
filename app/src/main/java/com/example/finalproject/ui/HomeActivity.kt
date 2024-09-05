@@ -45,7 +45,13 @@ class HomeActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(setOf(R.id.FirstFragment,R.id.searchFragment,R.id.favoriteFragment))
         setupActionBarWithNavController(navController,appBarConfiguration)
         bottomNavView.setupWithNavController(navController)
-
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val x=findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+                x.visibility=View.VISIBLE
+                navController.navigateUp()
+            }
+        })
 
     }
     override fun onSupportNavigateUp(): Boolean {
